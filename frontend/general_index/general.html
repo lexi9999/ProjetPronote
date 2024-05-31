@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="general_styling.css">
+</head>
+<body>
+
+    
+
+    <header>
+        <h2 class="logo">ENSISmart</h2>
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="#">Dev Team</a>
+            <a href="#">Services</a>
+            <button class="btnLogin-popup">Se connecter</button>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <div class="form-box login">
+            <div class="label-header">
+                <h2>Se connecter</h2>
+                <div class="remember-forgot checkbox-wrapper-10">
+                    <input checked="" type="checkbox" id="cb5" class="tgl tgl-flip">
+                    <label for="cb5" data-tg-on="Remember me" data-tg-off="Forget me" class="tgl-btn"></label>
+                </div>
+            </div>
+            <form class="login-form" action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="school-sharp"></ion-icon></span>
+                    <input type="text" placeholder="N° Etudiant" required>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-open-sharp"></ion-icon></span>
+                    <input type="password" placeholder="Mot de passe" required>
+                </div>
+                <button type="submit" class="btn">Se connecter</button>
+                
+            </form>
+        </div>
+    </div>
+
+    <script src="general_js.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+</body>
+
+</html>
