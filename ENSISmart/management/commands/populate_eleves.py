@@ -56,6 +56,9 @@ class Command(BaseCommand):
         ]
 
         for eleve in eleves:
-            Eleve.objects.create(nom=eleve["nom"], prenom=eleve["prenom"])
+            email = f"{eleve['prenom'].lower()}.{eleve['nom'].lower().replace(' ', '')}@uha.fr"
+            Eleve.objects.create(nom=eleve["nom"], prenom=eleve["prenom"], email=email)
+
+        self.stdout.write(self.style.SUCCESS('Successfully populated Eleve model with emails'))
         
-        self.stdout.write(self.style.SUCCESS('Successfully populated Eleve model'))
+    
