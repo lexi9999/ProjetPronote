@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="general_styling.css">
+    {% load static %}
+    <link rel="stylesheet" type='text/css' href="{% static 'general_styling.css' %}">
 </head>
 <body>
 
@@ -49,7 +51,7 @@
     </span>
 
 
-    <div class="wrapper">
+    <div class="wrapper login-wrap notwrap">
         <span class="icon-close">
             <ion-icon name="close-sharp"></ion-icon>
         </span>
@@ -76,12 +78,34 @@
                 <button type="submit" class="btn login-btn">Se connecter</button>
 
                 <a href="#" class="forget-pass">Mot de passe oublié</a>
+                <a href="#" class="first-co">Première connexion</a>
                 
             </form>
         </div>
     </div>
 
-    <script src="general_js.js"></script>
+    <div class="wrapper signup-wrap ">
+        <span class="icon-close signup">
+            <ion-icon name="close-sharp"></ion-icon>
+        </span>
+        <div class="form-box login">
+            <div class="label-header">
+                <h2>Première connexion</h2>
+            </div>
+            <form class="login-form" action="#">
+                <div class="input-box signup">
+                    <input type="text" class="mail_input signup" placeholder="Mail UHA" required>
+                    <span class="uha-label signup">@uha.fr</span>
+                </div>
+                
+                <button type="submit" class="btn login-btn">Se connecter</button>
+                
+            </form>
+        </div>
+    </div>
+
+
+    <script src="{% static 'general_js.js' %}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     

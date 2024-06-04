@@ -26,7 +26,7 @@ def login_view(request):
     else:
         form = LoginForm()
 
-    return render(request, 'login.html', {'form': form, 'message': message})
+    return render(request, 'frontend/general_index/general.html', {'form': form, 'message': message})
 
 def success_view(request):
     return render(request, 'success.html')

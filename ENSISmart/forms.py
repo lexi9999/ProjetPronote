@@ -4,11 +4,17 @@ from django.core.exceptions import ValidationError
 from .models import Eleve, Enseignant
 
 def validate_uha_email(value):
-    if not value.endswith('@uha.fr'):
+    value_t = value.split(".")
+    if len(value_t) != 2:
         raise ValidationError('L\'adresse e-mail doit se terminer par @uha.fr')
+    for e in "@.,;:!":
+        if e in value*[0]:
+            raise ValidationError('L\'adresse e-mail doit se terminer par @uha.fr')
+        if e in value[1]:
+            raise ValidationError('L\'adresse e-mail doit se terminer par @uha.fr')
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(
+    email = forms.TextInput(
         label='Adresse e-mail',
         max_length=100,
         validators=[validate_uha_email],
