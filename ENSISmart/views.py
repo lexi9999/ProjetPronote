@@ -1,13 +1,12 @@
-from django.db import models
 from django.utils.translation import gettext as _
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from icalendar import Calendar
 from django.http import JsonResponse
 import datetime
 from ENSISmart.models import Events
 import requests
+from .models import Eleve, Events, Absence
 
 def index(request):  
     all_events = Events.objects.all()
@@ -123,3 +122,25 @@ class UploadICalendarLinkView(View):
                 event.save()
 
         return JsonResponse({'status': 'calendrier importé avec succès'})
+
+class AbsenceView(View):
+    def get(self, request, event_id):
+        event = get_object_or_404(Events, id=event_id)
+        eleves = Eleve.objects.all()
+        absences = Absence.objects.filter(event=event)
+        absent_students = [absence.eleve for absence in absences]
+        context = {
+            'event': event,
+            'eleves': eleves,
+            'absent_students': absent_students,
+        }
+        return render(request, 'absence.html', context)
+
+    def post(self, request, event_id):
+        event = get_object_or_404(Events, id=event_id)
+        absent_students = request.POST.getlist('absent_students')
+        Absence.objects.filter(event=event).delete()
+        for eleve_id in absent_students:
+            eleve = get_object_or_404(Eleve, id=eleve_id)
+            Absence.objects.create(eleve=eleve, event=event)
+        return redirect('index')

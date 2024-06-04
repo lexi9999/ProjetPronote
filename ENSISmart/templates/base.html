@@ -2,54 +2,73 @@
 <html>
     <head>
         <title>Calendar</title>
+        <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- FullCalendar CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/fr.js"></script>
     </head>
 
     <body>
 
-    <div class="container">
-        <div class="row">
-           <h4>Calendrier des cours</h4> 
-           {% block content %} {% endblock %}
+        <div class="container">
+            <div class="row">
+                <h4>Calendrier des cours</h4> 
+                {% block content %} {% endblock %}
 
-        <div class="col-md-12 mt-3">
-            <h5>Upload le fichier ICS</h5>
-                <form method="post" enctype="multipart/form-data" action="/ENSISmart/upload_ics/">
-                    {% csrf_token %}
-                    <input type="file" name="ics_file" class="form-control mb-2" required>
-                    <button type="submit" class="btn btn-primary">Upload</button>
-                </form>
+                <div class="col-md-12 mt-3">
+                    <h5>Upload le fichier ICS</h5>
+                    <form method="post" enctype="multipart/form-data" action="/ENSISmart/upload_ics/">
+                        {% csrf_token %}
+                        <input type="file" name="ics_file" class="form-control mb-2" required>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form>
+                </div>
+
+                <div class="modal fade" id="eventDetailsModal" tabindex="-1" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="eventDetailsModalLabel">Détails du cours</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="eventDetailsContent">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <form method="post" id="upload-ical-form" action="{% url 'upload_icalendar_link' %}" class="form-inline">
+                            {% csrf_token %}
+                            <h5>ICalendar URL</h5>
+                            <input type="url" name="ical_url" id="ical_url" class="form-control mb-2" required>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <h4>Calendar Events</h4> 
+                        <a href="{% url 'display_events' %}" class="btn btn-primary">Show Event List</a>
+                    </div>
+                    <div class="row mt-3">
+                        <button id="delete-all-events" class="btn btn-danger">Delete All Events</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<!-- FullCalendar JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/fr.js"></script>
 
-    <div class="container">
-        <div class="row">
-            <form method="post" id="upload-ical-form" action="{% url 'upload_icalendar_link' %}" class="form-inline">
-                {% csrf_token %}
-                <h5>ICalendar URL</h5>
-                <input type="url" name="ical_url" id="ical_url" class="form-control mb-2" required>
-                <button type="submit" class="btn btn-primary">Upload</button>
-            </form>
-        </div>
-        <div class="row">
-            <h4>Calendar Events</h4> 
-            <a href="{% url 'display_events' %}" class="btn btn-primary">Voir la liste des évênements</a>
-        </div>
-        <div class="row mt-3">
-            <button id="delete-all-events" class="btn btn-danger">Supprimer tous les évênements</button>
-        </div>
-    </div>
-   
-        </div>
-    </div>
-       
 <script>
 $(document).ready(function () {
     var calendar = $('#calendar').fullCalendar({
@@ -150,23 +169,14 @@ $(document).ready(function () {
             });
         },
         eventClick: function (event) {
-            if (confirm("Etes-vous sûr de vouloir supprimer cet évênement?")) {
-                var id = event.id;
-                $.ajax({
-                    type: "GET",
-                    url: '/ENSISmart/remove/',
-                    data: {'id': id},
-                    dataType: "json",
-                    success: function (data) {
-                        calendar.fullCalendar('refetchEvents');
-                        alert('Evênement supprimé avec succès');
-                    },
-                    error: function (data) {
-                        alert('Il y a eu un problème lors de la suppression de l\'évênement');
-                    }
-                });
-            }
-        }
+                    $('#eventDetailsModal').modal('show');
+                    $('#eventDetailsContent').html(
+                        '<h5>' + event.title + '</h5>' +
+                        '<p>Start: ' + event.start.format("YYYY-MM-DD HH:mm") + '</p>' +
+                        '<p>End: ' + event.end.format("YYYY-MM-DD HH:mm") + '</p>' +
+                        '<a href="/ENSISmart/absence/' + event.id + '/" class="btn btn-primary">Gérer les Absences</a>'
+                    );
+                }
     });
 
     $('#delete-all-events').click(function () {

@@ -14,3 +14,17 @@ class Events(models.Model):
     class Meta:
         verbose_name = _('Calendar Events')
         verbose_name_plural = _('Calendar Events')
+
+
+class Eleve(models.Model):
+    nom = models.CharField(max_length=255)
+    prenom = models.CharField(max_length=255)
+
+
+class Absence(models.Model):
+    eleve = models.ForeignKey(Eleve, on_delete=models.CASCADE)
+    event = models.ForeignKey(Events, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Absence'
+        verbose_name_plural = 'Absences'
