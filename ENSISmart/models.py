@@ -9,4 +9,10 @@ class Eleve(models.Model):
     def __str__(self):
         return self.email
     
+class Enseignant(models.Model):
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.email
+    
 

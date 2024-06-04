@@ -1,7 +1,7 @@
 
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Eleve
+from .models import Eleve, Enseignant
 
 def validate_uha_email(value):
     if not value.endswith('@uha.fr'):
@@ -18,5 +18,7 @@ class LoginForm(forms.Form):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if not Eleve.objects.filter(email=email).exists():
-            raise ValidationError('Adresse e-mail non reconnue')
+            if not Enseignant.objects.filter(email=email).exists():
+                raise ValidationError('Adresse e-mail non reconnue (ni étudiant ni enseignant)')
         return email
+        

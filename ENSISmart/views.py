@@ -10,7 +10,9 @@ def login_view(request):
             message = 'Connexion réussie'
             return redirect('success')  # Redirect to a success page or handle login logic
         else:
-            message = 'Erreur : ' + ', '.join(form.errors.values())
+            # Convertir chaque objet ErrorList en chaîne de caractères
+            error_messages = [error.as_text() for error in form.errors.values()]
+            message = 'Erreur : ' + ', '.join(error_messages)
     else:
         form = LoginForm()
 
