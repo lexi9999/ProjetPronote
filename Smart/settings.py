@@ -122,3 +122,13 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtps.uha.fr'  # Serveur SMTP de l'Université de Haute-Alsace
+EMAIL_PORT = 465  # Port SMTP (utilise généralement le port 25 pour les connexions non sécurisées)
+EMAIL_USE_TLS = False  # L'Université de Haute-Alsace peut ne pas utiliser TLS pour les connexions SMTP
+
+# Adresse email de l'expéditeur (peut être une adresse @uha.fr si autorisé)
+EMAIL_HOST_USER = 'votre_adresse@votre_domaine.uha.fr'
+EMAIL_HOST_PASSWORD = 'votre_mot_de_passe'  # Mot de passe de l'adresse email
