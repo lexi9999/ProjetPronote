@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Notes</title>
+</head>
+<body>
+    <h1>Liste des Notes</h1>
+    <ul>
+        {% for note in notes %}
+            <li>
+                {{ note.eleve }} - {{ note.matiere }} - {{ note.note }}
+                <a href="{% url 'modifier_note' note.pk %}">Modifier</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'ajouter_note' %}">Ajouter une nouvelle note</a>
+</body>
+</html>
