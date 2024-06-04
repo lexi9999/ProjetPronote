@@ -62,7 +62,7 @@ def remove(request):
 class DeleteAllEventsView(View):
     def get(self, request):
         Events.objects.all().delete()
-        return JsonResponse({'status': 'All events deleted'})
+        return JsonResponse({'status': 'Tous les événements ont été supprimés avec succès'})
 
 def display_events(request):
     events = Events.objects.order_by('start')
@@ -86,7 +86,8 @@ class UploadICSView(View):
                 # Convertir les dates de début et de fin en objets datetime
                 start_datetime = start if isinstance(start, datetime.datetime) else datetime.datetime.combine(start, datetime.time.min)
                 end_datetime = end if isinstance(end, datetime.datetime) else datetime.datetime.combine(end, datetime.time.min)
-
+                start_datetime += datetime.timedelta(hours=2) # Ajouter 2 heures pour corriger le décalage horaire
+                end_datetime += datetime.timedelta(hours=2) 
                 # Créer et enregistrer une instance d'Events
                 event = Events(name=name, start=start_datetime, end=end_datetime)
                 event.save()
@@ -99,11 +100,11 @@ class UploadICalendarLinkView(View):
     def post(self, request):
         ical_url = request.POST.get('ical_url')
         if not ical_url:
-            return JsonResponse({'error': 'No URL provided'}, status=400)
+            return JsonResponse({'error': 'Pas d\'URL fournie'}, status=400)
 
         response = requests.get(ical_url)
         if response.status_code != 200:
-            return JsonResponse({'error': 'Failed to fetch the iCalendar file'}, status=400)
+            return JsonResponse({'error': 'Échec de l\'extraction du fichier iCalendar'}, status=400)
 
         cal = Calendar.from_ical(response.content)
         for component in cal.walk():
@@ -115,9 +116,10 @@ class UploadICalendarLinkView(View):
                 # Convertir les dates de début et de fin en objets datetime
                 start_datetime = start if isinstance(start, datetime.datetime) else datetime.datetime.combine(start, datetime.time.min)
                 end_datetime = end if isinstance(end, datetime.datetime) else datetime.datetime.combine(end, datetime.time.min)
-
+                start_datetime += datetime.timedelta(hours=2)
+                end_datetime += datetime.timedelta(hours=2)
                 # Créer et enregistrer une instance d'Events
                 event = Events(name=name, start=start_datetime, end=end_datetime)
                 event.save()
 
-        return JsonResponse({'status': 'iCalendar events uploaded'})
+        return JsonResponse({'status': 'calendrier importé avec succès'})

@@ -40,10 +40,10 @@
         </div>
         <div class="row">
             <h4>Calendar Events</h4> 
-            <a href="{% url 'display_events' %}" class="btn btn-primary">Show Event List</a>
+            <a href="{% url 'display_events' %}" class="btn btn-primary">Voir la liste des évênements</a>
         </div>
         <div class="row mt-3">
-            <button id="delete-all-events" class="btn btn-danger">Delete All Events</button>
+            <button id="delete-all-events" class="btn btn-danger">Supprimer tous les évênements</button>
         </div>
     </div>
    
@@ -64,15 +64,16 @@ $(document).ready(function () {
         editable: true,
         eventLimit: true,
         select: function (start, end, allDay) {
-            var title = prompt("Enter Event Title:");
+            var title = prompt("Entrer le titre de l'évênement:");
             if (title) {
                 var startDate = moment(start).format("YYYY-MM-DD");
-                var startTime = prompt("Enter Start Time (HH:mm):", moment(start).format("HH:mm"));
-                var endTime = prompt("Enter End Time (HH:mm):", moment(end).format("HH:mm"));
+                var startTime = prompt("Entrer heure de début (HH:mm):", moment(start).format("HH:mm"));
+                var endTime = prompt("Entrer heure de fin (HH:mm):", moment(end).format("HH:mm"));
 
                 if (startTime && endTime) {
-                    var startDateTime = moment(startDate + " " + startTime, "YYYY-MM-DD HH:mm");
-                    var endDateTime = moment(startDate + " " + endTime, "YYYY-MM-DD HH:mm");
+                    <!-- Add 2 hours to the start and end time -->
+                    var startDateTime = moment(startDate + " " + startTime, "YYYY-MM-DD HH:mm").add(2, 'hours');
+                    var endDateTime = moment(startDate + " " + endTime, "YYYY-MM-DD HH:mm").add(2, 'hours');
 
                     if (startDateTime.isValid() && endDateTime.isValid()) {
                         $.ajax({
@@ -86,17 +87,17 @@ $(document).ready(function () {
                             dataType: "json",
                             success: function (data) {
                                 calendar.fullCalendar('refetchEvents');
-                                alert("Event added successfully");
+                                alert("Evênement ajouté avec succès");
                             },
                             error: function (data) {
-                                alert('There was a problem adding the event.');
+                                alert('Il y a eu un problème lors de l\'ajout de l\'évênement');
                             }
                         });
                     } else {
-                        alert('Invalid time input.');
+                        alert('Saisie invalide. Veuillez entrer une heure valide');
                     }
                 } else {
-                    alert('Start time and end time are required.');
+                    alert('Heure de début et de fin requises');
                 }
             }
         },
@@ -120,7 +121,7 @@ $(document).ready(function () {
                     alert('Event updated');
                 },
                 error: function (data) {
-                    alert('There was a problem updating the event.');
+                    alert('Il y a eu un problème lors de la mise à jour de l\'évênement');
                 }
             });
         },
@@ -144,12 +145,12 @@ $(document).ready(function () {
                     alert('Event updated');
                 },
                 error: function (data) {
-                    alert('There was a problem updating the event.');
+                    alert('Il y a eu un problème lors de la mise à jour de l\'évênement');
                 }
             });
         },
         eventClick: function (event) {
-            if (confirm("Are you sure you want to remove it?")) {
+            if (confirm("Etes-vous sûr de vouloir supprimer cet évênement?")) {
                 var id = event.id;
                 $.ajax({
                     type: "GET",
@@ -158,10 +159,10 @@ $(document).ready(function () {
                     dataType: "json",
                     success: function (data) {
                         calendar.fullCalendar('refetchEvents');
-                        alert('Event removed');
+                        alert('Evênement supprimé avec succès');
                     },
                     error: function (data) {
-                        alert('There was a problem removing the event.');
+                        alert('Il y a eu un problème lors de la suppression de l\'évênement');
                     }
                 });
             }
@@ -169,17 +170,17 @@ $(document).ready(function () {
     });
 
     $('#delete-all-events').click(function () {
-        if (confirm("Are you sure you want to delete all events?")) {
+        if (confirm("Etes-vous sûr de vouloir supprimer tous les évênements?")) {
             $.ajax({
                 type: "GET",
                 url: '/ENSISmart/delete_all_events/',
                 dataType: "json",
                 success: function (data) {
                     calendar.fullCalendar('refetchEvents');
-                    alert('All events deleted');
+                    alert('Tous les évênements ont été supprimés avec succès');
                 },
                 error: function (data) {
-                    alert('There was a problem deleting all events.');
+                    alert('Il y a eu un problème lors de la suppression de tous les évênements');
                 }
             });
         }
@@ -194,11 +195,11 @@ $(document).ready(function () {
             data: form.serialize(),
             success: function (data) {
                 calendar.fullCalendar('refetchEvents');
-                alert('iCalendar events uploaded');
+                alert('Evênements iCalendar importés avec succès');
                 $('#ical_url').val('');
             },
             error: function (data) {
-                alert('There was a problem uploading the iCalendar events.');
+                alert('Il y a eu un problème lors de l\'importation des évênements iCalendar');
             }
         });
     });
