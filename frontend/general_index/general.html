@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="general_styling.css">
+</head>
+<body>
+
+
+    <header>
+        <div class="logo-text-div">
+            <img src="../ressources/logo.png" class="logo-text" alt="">
+            <h2 class="logo">ENSISmart</h2>
+        </div>
+        
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="#">Dev Team</a>
+            <a href="#">Services</a>
+            <button class="btnLogin-popup">Se connecter</button>
+        </nav>
+    </header>
+
+    <span class="paragraph">
+        <h3>Bienvenue sur ENSISmart</h3>
+        <br>
+        <p>
+            ENSISmart est conçue pour révolutionner la gestion académique en offrant aux professeurs et étudiants un accès instantané et sécurisé à leurs notes et registres d'absences. Notre plateforme intuitive permet une interaction fluide entre les enseignants et les apprenants, facilitant ainsi le suivi des progrès et la communication efficace.
+        </p>
+        <br>
+        <p>
+            Pour les étudiants :
+            Consultez vos notes et commentaires en temps réel.
+            Suivez vos absences et retards avec précision.
+            Recevez des notifications personnalisées pour rester à jour.
+        </p>
+        <br>
+        <p>
+            Pour les professeurs :
+            Mettez à jour les notes et les absences en quelques clics.
+            Visualisez les tendances de performance de la classe.
+            Communiquez directement avec les étudiants pour un soutien ciblé.
+        </p>
+        <br>
+        <p>
+            Avec ENSISmart, l'information académique est à portée de main, simplifiant la vie scolaire et renforçant l'engagement des étudiants. Rejoignez-nous et découvrez une gestion de classe sans effort, où que vous soyez !
+        </p>
+    </span>
+
+
+    <div class="wrapper">
+        <span class="icon-close">
+            <ion-icon name="close-sharp"></ion-icon>
+        </span>
+        <div class="form-box login">
+            <div class="label-header">
+                <h2>Se connecter</h2>
+                <div class="remember-forgot checkbox-wrapper-10">
+                    <input checked="" type="checkbox" id="cb5" class="tgl tgl-flip">
+                    <label for="cb5" data-tg-on="Remember me" data-tg-off="Forget me" class="tgl-btn"></label>
+                </div>
+            </div>
+            <form class="login-form" action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="school-sharp"></ion-icon></span>
+                    <input type="text" placeholder="N° Etudiant" required>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon class="open" name="lock-open-sharp"></ion-icon>
+                        <ion-icon class="closed icon-notactive" name="lock-closed-sharp"></ion-icon>
+                    </span>
+                    <input type="password" class="password" placeholder="Mot de passe" required>
+                </div>
+                <button type="submit" class="btn login-btn">Se connecter</button>
+
+                <a href="#" class="forget-pass">Mot de passe oublié</a>
+                
+            </form>
+        </div>
+    </div>
+
+    <script src="general_js.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+</body>
+
+</html>
