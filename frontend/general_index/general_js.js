@@ -1,8 +1,15 @@
-document.getElementById('password').addEventListener('input', function() {
-    var icon = document.getElementById('password-icon').children[0];
-    if (this.value.length > 0) {
-        icon.setAttribute('name', 'lock-closed-sharp');
-    } else {
-        icon.setAttribute('name', 'lock-open-sharp');
-    }
+const wrapper = document.querySelector('.wrapper');
+const btnPopup = document.querySelector('.btnLogin-popup');
+const icon_close = document.querySelector('.icon-close');
+const blury = document.querySelector('.paragraph');
+
+btnPopup.addEventListener('click', () => {
+    wrapper.classList.toggle('active-popup');
+    blury.classList.toggle('blur');
 });
+
+icon_close.addEventListener('click', ()=> {
+    wrapper.classList.remove('active-popup')
+    blury.classList.remove('blur');
+});
+
