@@ -12,7 +12,7 @@ def signup_view(request):
             # Send an email to the user
             send_mail(
                 'Succès',
-                'Lien pour créer un mot de passe : ',
+                'Lien pour créer un mot de passe : http://127.0.0.1:5500/ENSISmart/templates/frontend/general_index/change_password.html',
                 '761ae1002@smtp-brevo.com',  # Sender's email address
                 ['oussama.kouiri@uha.fr'],  # Recipient's email address
                 fail_silently=False,
