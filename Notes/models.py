@@ -1,6 +1,6 @@
 from django.db import models
 
-from User.models import Eleve
+from User.models import Eleve, Enseignant
 
 
 class UE(models.Model):
@@ -13,6 +13,7 @@ class UE(models.Model):
     
 class Matiere(models.Model):
     name = models.CharField(max_length=255)
+    name_enseignant = models.ForeignKey(Enseignant, on_delete=models.CASCADE)
     coefficient = models.FloatField()
     ue = models.ForeignKey(UE, on_delete=models.CASCADE)
     

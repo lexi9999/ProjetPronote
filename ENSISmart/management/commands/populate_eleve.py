@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from ENSISmart.models import Eleve  
+from User.models import Eleve  
 
 class Command(BaseCommand):
     help = 'Populate the Eleve model with initial data'
