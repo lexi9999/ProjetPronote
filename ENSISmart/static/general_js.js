@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the form from submitting the traditional way
         const formData = new FormData(form);
-        fetch("{% url 'login' %}", {
+        fetch(signupUrl, {
             method: 'POST',
             headers: {
                 'X-CSRFToken': formData.get('csrfmiddlewaretoken')
@@ -63,6 +63,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('email-display').textContent = '';
                 document.getElementById('error-messages').innerHTML = data.errors.join('<br>');
             }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('error-messages').innerHTML = 'An unexpected error occurred.';
         });
     });
 });
+
