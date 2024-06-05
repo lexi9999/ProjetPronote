@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mes matières</title>
+</head>
+<body>
+    <p>Mes matières <a href="{% url 'create_matiere' %}">[+]</a>  </p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <ul>
+            {% for matiere in mesMatieres %}
+                <li>
+                    {{ matiere.name }}
+                    <form method="post" action="{% url 'delete_matiere' matiere.id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="[-]">
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="supprimer matière(s) sélectionnée(s)">
+    </form>
+</body>
+</html>
