@@ -124,11 +124,12 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtps.uha.fr'  # Serveur SMTP de l'Université de Haute-Alsace
-EMAIL_PORT = 465  # Port SMTP (utilise généralement le port 25 pour les connexions non sécurisées)
-EMAIL_USE_TLS = False  # L'Université de Haute-Alsace peut ne pas utiliser TLS pour les connexions SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-relay.brevo.com'  
+EMAIL_PORT = 587  # Port SMTP (utilise généralement le port 25 pour les connexions non sécurisées)
+EMAIL_USE_TLS = True 
 
 # Adresse email de l'expéditeur (peut être une adresse @uha.fr si autorisé)
-EMAIL_HOST_USER = 'votre_adresse@votre_domaine.uha.fr'
-EMAIL_HOST_PASSWORD = 'votre_mot_de_passe'  # Mot de passe de l'adresse email
+EMAIL_HOST_USER = '761ae1002@smtp-brevo.com'
+EMAIL_HOST_PASSWORD = '2S0dDahgA3X5WLcm'  # Mot de passe de l'adresse email
+
