@@ -124,7 +124,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp-relay.brevo.com'  
 EMAIL_PORT = 587  # Port SMTP (utilise généralement le port 25 pour les connexions non sécurisées)
 EMAIL_USE_TLS = True 

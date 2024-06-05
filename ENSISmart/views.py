@@ -12,7 +12,7 @@ def signup_view(request):
             # Send an email to the user
             send_mail(
                 'Succès',
-                'Vous êtes connecté avec succès.',
+                'Lien pour créer un mot de passe : ',
                 '761ae1002@smtp-brevo.com',  # Sender's email address
                 ['oussama.kouiri@uha.fr'],  # Recipient's email address
                 fail_silently=False,
