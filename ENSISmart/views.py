@@ -4,9 +4,9 @@ from django.views import View
 from icalendar import Calendar
 from django.http import JsonResponse
 import datetime
-from ENSISmart.models import Events
 import requests
-from .models import Eleve, Events, Absence
+from Absences.models import Events, Absence
+from User.models import Eleve
 
 def index(request):  
     all_events = Events.objects.all()
