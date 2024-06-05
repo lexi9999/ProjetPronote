@@ -12,7 +12,7 @@
 
     <header>
         <div class="logo-text-div">
-            <img src="../ressources/logo.png" class="logo-text" alt="">
+            <img src="{% static 'logo.png' %}" class="logo-text" alt="">
             <h2 class="logo">ENSISmart</h2>
         </div>
         
@@ -51,7 +51,7 @@
     </span>
 
 
-    <div class="wrapper login-wrap notwrap">
+    <div class="wrapper login-wrap">
         <span class="icon-close">
             <ion-icon name="close-sharp"></ion-icon>
         </span>
@@ -84,7 +84,7 @@
         </div>
     </div>
 
-    <div class="wrapper signup-wrap ">
+    <div class="wrapper signup-wrap notwrap">
         <span class="icon-close signup">
             <ion-icon name="close-sharp"></ion-icon>
         </span>
@@ -92,17 +92,23 @@
             <div class="label-header">
                 <h2>Première connexion</h2>
             </div>
-            <form class="login-form" action="#">
+            <form class="login-form" id="login-form" method="post" action="{% url 'login' %}">
+                {% csrf_token %}
                 <div class="input-box signup">
-                    <input type="text" class="mail_input signup" placeholder="Mail UHA" required>
+                    {{ form.email }}
                     <span class="uha-label signup">@uha.fr</span>
                 </div>
                 
                 <button type="submit" class="btn login-btn">Se connecter</button>
-                
+                <p id="valid-address" class="valid-address">Adresse valide: <span id="email-display"></span></p>
+                <div id="error-messages" class="error-messages"></div>
             </form>
         </div>
     </div>
+
+    
+    
+
 
 
     <script src="{% static 'general_js.js' %}"></script>

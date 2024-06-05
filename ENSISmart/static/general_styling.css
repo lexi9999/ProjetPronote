@@ -58,6 +58,17 @@ header {
     font-size: 2em;
 }
 
+.valid-address {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    display: none;
+    transform: translateY(-150%);
+}
+.error-messages {
+    color: rgb(255, 255, 255);
+    transform: translateY(-150%);
+}
+
 .label-header {
     display: flex;
     justify-content: space-between;
@@ -155,7 +166,7 @@ button.btn:hover{
     display:inline-flex;
     justify-content: center;
     align-items: center;
-    margin-left: -15%;
+    margin-left: -10%;
     
 }
 

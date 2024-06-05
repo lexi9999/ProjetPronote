@@ -1,32 +1,32 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.core.mail import send_mail
-from .forms import LoginForm
+from django.http import JsonResponse
+from .forms import SignupForm
 
-def login_view(request):
-    message = ''
+def signup_view(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('email')
-            # Envoyer un email à l'utilisateur
+            
+            # Send an email to the user
             send_mail(
                 'Succès',
                 'Vous êtes connecté avec succès.',
-                'from@example.com',  # Adresse email de l'expéditeur
-                [email],  # Adresse email du destinataire
+                'from@example.com',  # Sender's email address
+                [email],  # Recipient's email address
                 fail_silently=False,
             )
-            # Handle successful login logic here
-            message = 'Connexion réussie'
-            return redirect('success')  # Redirect to a success page or handle login logic
+            
+            return JsonResponse({'success': True, 'email': email})
         else:
-            # Convertir chaque objet ErrorList en chaîne de caractères
             error_messages = [error.as_text() for error in form.errors.values()]
-            message = 'Erreur : ' + ', '.join(error_messages)
+            return JsonResponse({'success': False, 'errors': error_messages})
     else:
-        form = LoginForm()
+        form = SignupForm()
 
-    return render(request, 'frontend/general_index/general.html', {'form': form, 'message': message})
+    return render(request, 'frontend/general_index/general.html', {'form': form})
+
 
 def success_view(request):
     return render(request, 'success.html')
