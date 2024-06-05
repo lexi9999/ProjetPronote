@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang='fr'>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    <link rel="stylesheet" href="dashboard_style.css"/>
+    </head>
+    <body>
+        <header>
+            <div class="logo-text-div">
+                <img src="logo.png" class="logo-text" alt="Logo du site">
+                <h2 class="logo">ENSISmart</h2>
+            </div>
+            <div class="user-menu">
+                <div class="user-icon" onclick="toggleMenu()">
+                    <span class="initials">AB</span>
+                </div>
+                <div class="dropdown-menu" id="menu">
+                    <p>Nom Prénom</p>
+                    <a href="#">Gérer mon compte</a>
+                    <a href="#">Se déconnecter</a>
+                </div>
+            </div>
+        </header>
+        <section>
+         <div class="tab">
+            <button class="tablinks active" data-anim="1">Notes</button>
+            <button class="tablinks" data-anim="2">Absence</button>
+         </div>
+         <hr>
+    <div class="row activeContenu" data-anim="1">
+        <div class="container left">
+            <div class="content" onclick="toggleContent('additional-content')">
+                <h2>maths générales </h2>
+                <div id="additional-content" class="hidden">
+                <p>calcul matriciel </p>
+                <p>analyse générale</p>
+                <p>systémes stochastiques</p>
+                <p>analyse numérique et calcul scientifique</p>
+                <p>projet</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="container milieu">
+            <div class="content" onclick="toggleContent('additional-content1')">
+                <h2>Données</h2>
+                <div id="additional-content1" class="hidden">
+                <p>SGBD </p>
+                <p>BI</p>
+                </div>
+            </div>
+        </div>
+        <div class="container right">
+            <div class="content" onclick="toggleContent('additional-content2')">
+                <h2>ingénierie objet </h2>
+                <div id="additional-content2" class="hidden" >
+                <p> AOO & langage java</p>
+                <p>UML</p> 
+                <p>projet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" data-anim="2"> 
+        <p>AHAHAHAHAHA</p>   
+    </div>
+    
+        </section>
+        <script>
+        function toggleMenu() {
+        const menu = document.getElementById('menu');
+        menu.classList.toggle('show');
+        }
+
+        const tablinks = document.querySelectorAll('.tablinks');
+        const row = document.querySelectorAll('.row');
+        let index = 0;
+
+        tablinks.forEach(onglet => {
+
+            onglet.addEventListener('click', () => {
+
+                if(onglet.classList.contains('active')){
+                    return;
+                } else {
+                    onglet.classList.add('active');
+                }
+
+                index = onglet.getAttribute('data-anim');
+                console.log(index);
+
+                for(i = 0; i < tablinks.length; i++) {
+                    
+                    if(tablinks[i].getAttribute('data-anim') != index) {
+                        tablinks[i].classList.remove('active');
+                    }
+                }
+
+                for(j = 0; j < row.length; j++){
+
+                    if(row[j].getAttribute('data-anim') == index) {
+                        row[j].classList.add('activeContenu');
+                    } else {
+                        row[j].classList.remove('activeContenu');
+                    }
+
+
+                }
+            })
+        })
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-icon') && !event.target.matches('.initials')) {
+                const menu = document.getElementById('menu');
+                if (menu.classList.contains('show')) {
+                    menu.classList.remove('show');
+                }
+            }
+        }
+        function toggleContent(contentID) {
+            var content = document.getElementById(contentID);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+            } else {
+                content.classList.add('hidden');
+            }
+        }
+        
+        
+
+    </script>
+    </body>
+</html>
