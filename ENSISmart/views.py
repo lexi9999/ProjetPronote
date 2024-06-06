@@ -10,6 +10,8 @@ from django.contrib.auth.models import *
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import check_password
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def signup_view(request):
