@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Matières</title>
+</head>
+<body>
+    <h1>Liste des Matières</h1>
+    <ul>
+        {% for matiere in matieres %}
+            <li>
+                <a href="{% url 'note_liste' matiere=matiere %}">{{ matiere }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

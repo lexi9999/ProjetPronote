@@ -42,7 +42,11 @@ def update_note_ajax(request, pk):
     except Exception as e:
         return JsonResponse({'success': False, 'errors': str(e)})
     
-def note_liste(request):
-    notes = Note.objects.all()
-    eleves = Eleve.objects.all()  # Assurez-vous de passer la liste des élèves
+def note_liste(request, matiere):
+    notes = Note.objects.filter(matiere=matiere)
+    eleves = notes.values_list('eleve', flat=True).distinct()
     return render(request, 'note_liste.html', {'notes': notes, 'eleves': eleves})
+
+def matiere_liste(request):
+    matieres = Note.objects.values_list('matiere', flat=True).distinct()
+    return render(request, 'matiere_liste.html', {'matieres': matieres})
