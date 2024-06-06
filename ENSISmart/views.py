@@ -75,6 +75,11 @@ def signup_view(request):
 
     return render(request, 'frontend/general_index/general.html', {'form': form, 'form_login': form_login})
 
+def error_view(request):
+    if request.method == 'POST':
+        return redirect('login')  # Assuming 'login' is the name of your login URL pattern
+    return render(request, 'frontend/general_index/error_page.html')
+
 def reset_password_view(request, token):
     try:
         temp_link = TemporaryLink.objects.get(token=token)
@@ -97,10 +102,9 @@ def reset_password_view(request, token):
                 try:
                     user = Enseignant.objects.get(email=email)
                 except Enseignant.DoesNotExist:
-                    return render(request, 'frontend/reset_password/invalid.html')
+                    return render(request, 'frontend/general_index/error_page.html')
 
             user.password = hashed_password
-            print(user.password,"Azerty123456")
             user.is_first_co = False
             user.save()
             

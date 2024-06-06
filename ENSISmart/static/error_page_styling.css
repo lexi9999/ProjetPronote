@@ -1,0 +1,21 @@
+.info {
+    font-size: 3em;
+    transform: translateY(100%) translateX(-100%);
+    
+}
+
+header {
+    transform: translateY(-20%);
+}
+
+.info-text {
+    width: 60%;
+}
+
+.sad-icon {
+    color: #e8944e;
+}
+
+.green {
+    color: #53ce8c;
+}
