@@ -17,9 +17,3 @@ Avec ENSISmart, l'information académique est à portée de main, simplifiant la
 ## trello
 
 [lien du trello](https://trello.com/b/rMhFDhbs)
-
-
-
-
-
-
