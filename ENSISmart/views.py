@@ -8,6 +8,8 @@ from datetime import timedelta
 from .models import TemporaryLink
 from django.contrib.auth.models import *
 from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def signup_view(request):
@@ -26,7 +28,7 @@ def signup_view(request):
             send_mail(
                 'Succès',
                 f'Lien pour créer un mot de passe : {link}',
-                '761ae1002@smtp-brevo.com',  # Sender's email address
+                'settings.EMAIL_HOST_USER',  # Sender's email address
                 [email],  # Recipient's email address
                 fail_silently=False,
             )
