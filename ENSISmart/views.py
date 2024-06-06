@@ -100,6 +100,7 @@ def reset_password_view(request, token):
                     return render(request, 'frontend/reset_password/invalid.html')
 
             user.password = hashed_password
+            print(user.password,"Azerty123456")
             user.is_first_co = False
             user.save()
             
