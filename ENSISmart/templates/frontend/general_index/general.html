@@ -59,24 +59,25 @@
             <ion-icon name="close-sharp"></ion-icon>
         </span>
         <div class="form-box login">
+            {% csrf_token %}
             <div class="label-header">
                 <h2>Se connecter</h2>
                 <div class="remember-forgot checkbox-wrapper-10">
-                    <input checked="false" type="checkbox" id="cb5" class="tgl tgl-flip">
+                    {{ form_login.remember_me }}
                     <label for="cb5" data-tg-on="Remember me" data-tg-off="Forget me" class="tgl-btn"></label>
                 </div>
             </div>
-            <form class="login-form" action="#">
+            <form class="login-form" action="{% url 'login' %}">
                 <div class="input-box">
                     <span class="icon"><ion-icon name="school-sharp"></ion-icon></span>
-                    <input type="text" placeholder="N° Etudiant" required>
+                    {{ form_login.email_login }}
                 </div>
                 <div class="input-box">
                     <span class="icon">
                         <ion-icon class="open" name="lock-open-sharp"></ion-icon>
                         <ion-icon class="closed icon-notactive" name="lock-closed-sharp"></ion-icon>
                     </span>
-                    <input type="password" class="password" placeholder="Mot de passe" required>
+                    {{ form_login.password }}
                 </div>
                 <button type="submit" class="btn login-btn">Se connecter</button>
                 <a href="#" class="first-co">Première connexion</a>

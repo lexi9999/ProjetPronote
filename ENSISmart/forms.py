@@ -72,7 +72,7 @@ class LoginForm(forms.Form):
         required=False,
         widget=forms.CheckboxInput(attrs={'class': 'tgl tgl-flip', 'id': 'cb5'})
     )
-    email = forms.CharField(
+    email_login = forms.CharField(
         label='Adresse e-mail',
         max_length=100,
         validators=[validate_email],  # You can replace this with validate_uha_email if you have a custom validator.
@@ -101,8 +101,23 @@ class LoginForm(forms.Form):
     
     def clean(self):
         cleaned_data = super().clean()
-        new_password = cleaned_data.get('new_password')
-        confirm_password = cleaned_data.get('confirm_password')
+        new_password = cleaned_data.get("new_password")
+        confirm_password = cleaned_data.get("confirm_password")
 
-        if new_password and confirm_password and new_password != confirm_password:
-            raise forms.ValidationError("Passwords do not match.")
+        # Check if the new password meets the criteria
+        if new_password:
+            if len(new_password) < 12:
+                raise ValidationError("Password must be at least 12 characters long.")
+            if not re.search(r'[a-z]', new_password):
+                raise ValidationError("Password must contain at least one lowercase letter.")
+            if not re.search(r'[A-Z]', new_password):
+                raise ValidationError("Password must contain at least one uppercase letter.")
+            if not re.search(r'\d', new_password):
+                raise ValidationError("Password must contain at least one digit.")
+
+        # Check if the new password and confirm password match
+        if new_password and confirm_password:
+            if new_password != confirm_password:
+                raise ValidationError("Passwords do not match.")
+
+        return cleaned_data

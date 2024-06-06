@@ -1,45 +1,76 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.mail import send_mail
 from django.http import JsonResponse
-from .forms import PasswordResetForm, SignupForm
+from .forms import PasswordResetForm, SignupForm, LoginForm
 from django.utils.crypto import get_random_string
 from django.utils import timezone
 from datetime import timedelta
 from .models import Eleve, Enseignant, TemporaryLink
 from django.contrib.auth.models import *
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import check_password
 
 
 def signup_view(request):
     if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get('email')
-            token = get_random_string(30)
-            expires_at = timezone.now() + timedelta(hours=24)  # Link valid for 1 hour
-            TemporaryLink.objects.create(token=token, expires_at=expires_at, email=email) 
-            user = User.objects.filter(email=email).first()
-            
-            link = request.build_absolute_uri(f'/reset-password/{token}/')
-            print(link)
-            
-            # Send an email to the user
-            send_mail(
-                'Succès',
-                f'Lien pour créer un mot de passe : {link}',
-                '761ae1002@smtp-brevo.com',  # Sender's email address
-                [email],  # Recipient's email address
-                fail_silently=False,
-            )
-            
-            return JsonResponse({'success': True, 'email': email})
+        # Determine which form is being submitted
+        if 'email_login' in request.POST:
+            form_login = LoginForm(request.POST)
+            form = SignupForm()  # Initialize an empty signup form
+            if form_login.is_valid():
+                email = form_login.cleaned_data.get('email_login')
+                password = form_login.cleaned_data.get('password')
+
+                user = None
+                try:
+                    user = Eleve.objects.get(email=email)
+                except Eleve.DoesNotExist:
+                    try:
+                        user = Enseignant.objects.get(email=email)
+                    except Enseignant.DoesNotExist:
+                        user = None
+
+                if user and check_password(password, user.password):
+                    # Authenticate and login the user
+                    login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                    if form_login.cleaned_data.get('remember_me'):
+                        request.session.set_expiry(1209600)  # 2 weeks
+                    else:
+                        request.session.set_expiry(0)
+                    return redirect('success')  # Redirect to the desired success page
+                else:
+                    form_login.add_error(None, 'Invalid email or password')
         else:
-            error_messages = [error.as_text() for error in form.errors.values()]
-            return JsonResponse({'success': False, 'errors': error_messages})
+            form = SignupForm(request.POST)
+            form_login = LoginForm()  # Initialize an empty login form
+            if form.is_valid():
+                email = form.cleaned_data.get('email')
+                token = get_random_string(30)
+                expires_at = timezone.now() + timedelta(hours=24)  # Link valid for 1 hour
+                TemporaryLink.objects.create(token=token, expires_at=expires_at, email=email) 
+                
+                link = request.build_absolute_uri(f'/reset-password/{token}/')
+                print(link)
+                
+                # Send an email to the user
+                send_mail(
+                    'Succès',
+                    f'Lien pour créer un mot de passe : {link}',
+                    '761ae1002@smtp-brevo.com',  # Sender's email address
+                    [email],  # Recipient's email address
+                    fail_silently=False,
+                )
+                
+                return JsonResponse({'success': True, 'email': email})
+            else:
+                error_messages = [error.as_text() for error in form.errors.values()]
+                return JsonResponse({'success': False, 'errors': error_messages})
     else:
         form = SignupForm()
+        form_login = LoginForm()
 
-    return render(request, 'frontend/general_index/general.html', {'form': form})
+    return render(request, 'frontend/general_index/general.html', {'form': form, 'form_login': form_login})
 
 def reset_password_view(request, token):
     try:
