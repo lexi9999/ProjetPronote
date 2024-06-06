@@ -1,10 +1,10 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
-from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('', views.note_liste, name='note_liste'),  # Liste des notes
-    path('ajouter/', views.ajouter_note, name='ajouter_note'),  # Ajouter une note
-    path('modifier/<int:pk>/', views.modifier_note, name='modifier_note'),  # Modifier une note
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('', views.note_liste, name='note_liste'),  # L'URL de base User/ redirige vers note_liste
+    path('note_liste/', views.note_liste, name='note_liste'),
+    path('modifier_note/<int:note_id>/', views.modifier_note, name='modifier_note'),
+    path('delete_note/<int:note_id>/', views.delete_note, name='delete_note'),
 ]
+
