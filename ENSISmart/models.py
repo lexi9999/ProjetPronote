@@ -17,13 +17,15 @@ class TemporaryLink(models.Model):
 
 class Eleve(models.Model):
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=30, default=make_password('defaultpassword'))
+    password = models.CharField(max_length=30)
+    is_first_co = models.BooleanField(default=True)
     def __str__(self):
         return self.email
     
 class Enseignant(models.Model):
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=30, default=make_password('defaultpassword'))
+    password = models.CharField(max_length=30)
+    is_first_co = models.BooleanField(default=True)
     def __str__(self):
         return self.email
     

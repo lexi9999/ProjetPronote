@@ -184,7 +184,8 @@ span.paragraph {
 
 a.first-co {
     position: absolute;
-    transform: translateY(450%) translateX(-100%);
+    width: 100%;
+    transform:translateX(-80%) translateY(500%);
     text-decoration: none;
 }
 

@@ -5,7 +5,7 @@ from .forms import PasswordResetForm, SignupForm
 from django.utils.crypto import get_random_string
 from django.utils import timezone
 from datetime import timedelta
-from .models import TemporaryLink
+from .models import Eleve, Enseignant, TemporaryLink
 from django.contrib.auth.models import *
 from django.contrib.auth.hashers import make_password
 
@@ -17,10 +17,11 @@ def signup_view(request):
             email = form.cleaned_data.get('email')
             token = get_random_string(30)
             expires_at = timezone.now() + timedelta(hours=24)  # Link valid for 1 hour
-            TemporaryLink.objects.create(token=token, expires_at=expires_at)    
+            TemporaryLink.objects.create(token=token, expires_at=expires_at, email=email) 
             user = User.objects.filter(email=email).first()
             
             link = request.build_absolute_uri(f'/reset-password/{token}/')
+            print(link)
             
             # Send an email to the user
             send_mail(
@@ -52,11 +53,21 @@ def reset_password_view(request, token):
         form = PasswordResetForm(request.POST)
         if form.is_valid():
             new_password = form.cleaned_data['new_password']
-            # You should add your logic to reset the user's password here.
-            # Example:
-            # user = temp_link.user
-            # user.set_password(new_password)
-            # user.save()
+            hashed_password = make_password(new_password)
+
+            email = temp_link.email
+
+            try:
+                user = Eleve.objects.get(email=email)
+            except Eleve.DoesNotExist:
+                try:
+                    user = Enseignant.objects.get(email=email)
+                except Enseignant.DoesNotExist:
+                    return render(request, 'frontend/reset_password/invalid.html')
+
+            user.password = hashed_password
+            user.is_first_co = False
+            user.save()
             
             temp_link.delete()  # Remove the temporary link after successful password reset
             return redirect('success')  # Redirect to a success page or login page
@@ -64,6 +75,7 @@ def reset_password_view(request, token):
         form = PasswordResetForm()
 
     return render(request, 'frontend/general_index/change_password.html', {'form': form})
+
 
 def reset_password(request, token):
     temp_link = get_object_or_404(TemporaryLink, token=token)
