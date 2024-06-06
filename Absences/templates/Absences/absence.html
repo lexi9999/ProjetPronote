@@ -1,0 +1,28 @@
+{% extends 'Absences/base.html' %}
+
+{% block content %}
+<h2>Mark Absences for {{ event.name }}</h2>
+<form method="post">
+    {% csrf_token %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Absent</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for eleve in eleves %}
+            <tr>
+                <td>{{ eleve.nom }} {{ eleve.prenom }}</td>
+                <td>
+                    <input type="checkbox" name="absent_students" value="{{ eleve.id }}"
+                           {% if eleve in absent_students %}checked{% endif %}>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}
