@@ -1,7 +1,7 @@
 
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Eleve, Enseignant
+from User.models import Eleve, Enseignant
 import re
 
 def validate_uha_email(value):

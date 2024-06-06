@@ -5,7 +5,8 @@ from .forms import PasswordResetForm, SignupForm, LoginForm
 from django.utils.crypto import get_random_string
 from django.utils import timezone
 from datetime import timedelta
-from .models import Eleve, Enseignant, TemporaryLink
+from User.models import Eleve, Enseignant
+from .models import TemporaryLink
 from django.contrib.auth.models import *
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login
