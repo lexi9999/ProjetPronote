@@ -1,6 +1,8 @@
-from django.contrib.auth.decorators import permission_required
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Note
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render, redirect
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+from .models import Note, Eleve
 from .forms import NoteForm
 
 #@permission_required('User.edit_note')
@@ -26,6 +28,21 @@ def modifier_note(request, pk):
         form = NoteForm(instance=note)
     return render(request, 'modifier_note.html', {'form': form})
 
+
+@require_POST
+def update_note_ajax(request, pk):
+    try:
+        note = get_object_or_404(Note, pk=pk)
+        form = NoteForm(request.POST, instance=note)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'success': True, 'note': form.cleaned_data['note'], 'matiere': form.cleaned_data['matiere']})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
+    except Exception as e:
+        return JsonResponse({'success': False, 'errors': str(e)})
+    
 def note_liste(request):
     notes = Note.objects.all()
-    return render(request, 'note_liste.html', {'notes': notes})
+    eleves = Eleve.objects.all()  # Assurez-vous de passer la liste des élèves
+    return render(request, 'note_liste.html', {'notes': notes, 'eleves': eleves})

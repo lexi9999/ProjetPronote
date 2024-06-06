@@ -4,17 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Notes</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>Liste des Notes</h1>
     <ul>
         {% for note in notes %}
-            <li>
-                {{ note.eleve }} - {{ note.matiere }} - {{ note.note }}
-                <a href="{% url 'modifier_note' note.pk %}">Modifier</a>
+            <li id="note-{{ note.pk }}">
+                {{ note.eleve }} - {{ note.matiere }} - <span class="note">{{ note.note }}</span>
+                <a href="#" class="edit-link" data-note-id="{{ note.pk }}">Modifier</a>
+                <div class="edit-form" style="display:none;">
+                    <form class="update-note-form" data-note-id="{{ note.pk }}">
+                        {% csrf_token %}
+                        <select name="eleve" required>
+                            {% for eleve in eleves %}
+                                <option value="{{ eleve.pk }}" {% if eleve.pk == note.eleve.pk %}selected{% endif %}>
+                                    {{ eleve }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <input type="number" step="0.01" name="note" value="{{ note.note }}" required>
+                        <input type="text" name="matiere" value="{{ note.matiere }}" required>
+                        <button type="submit">Enregistrer</button>
+                    </form>
+                </div>
             </li>
         {% endfor %}
     </ul>
     <a href="{% url 'ajouter_note' %}">Ajouter une nouvelle note</a>
+
+    <script>
+        $(document).ready(function(){
+            $('.edit-link').click(function(e){
+                e.preventDefault();
+                let noteId = $(this).data('note-id');
+                $('#note-' + noteId + ' .edit-form').toggle();
+            });
+
+            $('.update-note-form').on('submit', function(event){
+                event.preventDefault();
+                let form = $(this);
+                let noteId = form.data('note-id');
+                let eleveValue = form.find('select[name="eleve"]').val();
+                let noteValue = form.find('input[name="note"]').val();
+                let matiereValue = form.find('input[name="matiere"]').val();
+                let csrfToken = form.find('input[name="csrfmiddlewaretoken"]').val();
+
+                $.ajax({
+                    url: "{% url 'update_note_ajax' 0 %}".replace('/0/', '/' + noteId + '/'),
+                    method: "POST",
+                    data: {
+                        eleve: eleveValue,
+                        note: noteValue,
+                        matiere: matiereValue,
+                        csrfmiddlewaretoken: csrfToken
+                    },
+                    success: function(response){
+                        if(response.success){
+                            $('#note-' + noteId + ' .note').text(response.note);
+                            $('#note-' + noteId + ' .edit-form').hide();
+                        } else {
+                            let errorMessages = '';
+                            for (let field in response.errors) {
+                                if (Array.isArray(response.errors[field])) {
+                                    errorMessages += field + ': ' + response.errors[field].join(', ') + '\n';
+                                } else {
+                                    errorMessages += field + ': ' + response.errors[field] + '\n';
+                                }
+                            }
+                            alert('Erreur lors de la mise à jour:\n' + errorMessages);
+                        }
+                    },
+                    error: function(xhr, status, error){
+                        console.error("Erreur AJAX: ", status, error);
+                        alert('Erreur AJAX: ' + error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
