@@ -24,6 +24,13 @@ SECRET_KEY = "django-insecure-c1^2fw8hc*)ex9jpug$wuq6wv0=dy!h1g$4f)^ss^c4mg@3m-q
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'noreply.ensismart@gmail.com'
+EMAIL_HOST_PASSWORD = 'zcpb irjk jwyj hctx'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 
 ALLOWED_HOSTS = []
 
@@ -124,12 +131,12 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp-relay.brevo.com'  
-EMAIL_PORT = 587  # Port SMTP (utilise généralement le port 25 pour les connexions non sécurisées)
-EMAIL_USE_TLS = True 
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_HOST = 'smtp-relay.brevo.com'  
+#EMAIL_PORT = 587  # Port SMTP (utilise généralement le port 25 pour les connexions non sécurisées)
+#EMAIL_USE_TLS = True 
 
 # Adresse email de l'expéditeur (peut être une adresse @uha.fr si autorisé)
-EMAIL_HOST_USER = '761ae1002@smtp-brevo.com'
-EMAIL_HOST_PASSWORD = '2S0dDahgA3X5WLcm'  # Mot de passe de l'adresse email
+#EMAIL_HOST_USER = '761ae1002@smtp-brevo.com'
+#EMAIL_HOST_PASSWORD = '2S0dDahgA3X5WLcm'  # Mot de passe de l'adresse email
 
