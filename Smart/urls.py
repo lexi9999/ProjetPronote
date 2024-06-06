@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    #path('', include('User.urls')),
-    path("admin/", admin.site.urls),
     path('', include('ENSISmart.urls')),
+    path('Absences/', include('Absences.urls')),
+    path("admin/", admin.site.urls),
+    # Other URL patterns...
 ]
