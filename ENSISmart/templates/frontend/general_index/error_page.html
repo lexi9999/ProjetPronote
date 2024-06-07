@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'general_styling.css' %}">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'error_page_styling.css' %}">
+
+    <title>erreur</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo-text-div">
+            <img src="{% static 'logo.png' %}" class="logo-text" alt="">
+            <h2 class="logo">ENSISmart</h2>
+        </div>
+
+        <div class="info">
+            <p class='info-text'>
+                Une erreur s'est produite
+            </p>
+            <ion-icon class='sad-icon' name="sad-sharp"></ion-icon>
+            <p class='info-text green'>
+                Mais vous pouvez jouer á Tetris
+            </p>
+        </div>
+        
+        <nav class="navigation">
+            <button class="btnLogin-popup btnLogout" method="POST">Acceuil</button>
+        </nav>
+    </header>
+
+    <script src="{% static 'error_page_js.js' %}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
