@@ -1,6 +1,6 @@
 import pandas as pd
 from django.core.management.base import BaseCommand
-from ENSISmart.models import Eleve2  # Remplacez par votre modèle
+from User.models import Eleve  # Remplacez par votre modèle
 
 class Command(BaseCommand):
     help = 'Import data from a CSV file'
@@ -13,8 +13,7 @@ class Command(BaseCommand):
         data = pd.read_csv(csv_file)
 
         for index, row in data.iterrows():
-            Eleve2.objects.create(
-                num_etudiant=row['N° étudiant'],
+            Eleve.objects.create(
                 NOM=row['NOM'],
                 Prénom=row['Prénom'],
                 email=row['email'],
