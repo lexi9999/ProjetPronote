@@ -7,28 +7,31 @@ class Eleve(models.Model):
     name = models.CharField(max_length=255, unique=True)
     firstName = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)
+    password = models.CharField(max_length=255, null=True)
     is_first_co = models.BooleanField(default=True)
+    last_login = models.DateTimeField(auto_now_add=True, null=True)
     
 
     def __str__(self):
-        return self.email
+        return "Eleve: " +  self.email
     
 class Enseignant(models.Model):
     name = models.CharField(max_length=255, unique=True)
     firstName = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)
+    password = models.CharField(max_length=255, null=True)
     is_first_co = models.BooleanField(default=True)
+    last_login = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.email
+        return "Enseignant: " + self.email
 
 class Administrateur(models.Model):
     name = models.CharField(max_length=255, unique=True)
     firstName = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=255)
+    password = models.CharField(max_length=255, null=True)
+    last_login = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.email
