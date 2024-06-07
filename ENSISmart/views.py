@@ -33,7 +33,6 @@ def signup_view(request):
                         user = Enseignant.objects.get(email=email)
                     except Enseignant.DoesNotExist:
                         user = None
-
                 if user and check_password(password, user.password):
                     # Authenticate and login the user
                     login(request, user, backend='django.contrib.auth.backends.ModelBackend')
