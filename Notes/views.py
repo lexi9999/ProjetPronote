@@ -49,26 +49,15 @@ def update_note_ajax(request, pk):
 
 @csrf_exempt
 @require_POST
-def update_note_ajax(request):
-    data = json.loads(request.body)
-    note_id = data['note_id']
-    new_note = data['note']
-    note = get_object_or_404(Note, pk=note_id)
-    
-    note.note = new_note
-    note.save()
-
-    # Calculate the new average
-    matiere = note.matiere
-    notes = Note.objects.filter(matiere=matiere)
-    moyenne = notes.aggregate(Avg('note'))['note__avg']
-
-    response_data = {
-        'note': new_note,
-        'moyenne': moyenne,
-    }
-
-    return JsonResponse(response_data)
+def update_note_ajax(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+    form = NoteForm(request.POST, instance=note)
+    if form.is_valid():
+        form.save()
+        moyenne = Note.objects.filter(matiere=note.matiere).aggregate(Avg('note'))['note__avg']
+        return JsonResponse({'success': True, 'note': form.cleaned_data['note'], 'moyenne': moyenne})
+    else:
+        return JsonResponse({'success': False, 'errors': form.errors})
 
 
 
