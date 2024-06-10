@@ -1,6 +1,6 @@
 import pandas as pd
 from django.core.management.base import BaseCommand
-from User.models import Eleve  # Remplacez par votre modèle
+from models import Eleve  # Importer Eleve depuis le fichier models.py dans le même répertoire
 
 class Command(BaseCommand):
     help = 'Import data from a CSV file'
@@ -14,11 +14,11 @@ class Command(BaseCommand):
 
         for index, row in data.iterrows():
             Eleve.objects.create(
-                NOM=row['NOM'],
-                Prénom=row['Prénom'],
+                name=row['NOM'],
+                firstName=row['Prénom'],
                 email=row['email'],
                 password=row['password'],
-                role=row['role']
+                is_first_co=row['role']
             )
 
         self.stdout.write(self.style.SUCCESS('Data imported successfully'))
