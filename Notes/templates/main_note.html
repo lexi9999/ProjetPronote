@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% load static %}
+    <link rel="stylesheet" type='text/css' href="{% static 'general_styling.css' %}">
+    <link rel="stylesheet" type='text/css' href="../static/main_note_styling.css">
+    <script>
+        const signupUrl = "{% url 'login' %}";
+    </script>
+</head>
+<body>
+
+
+    <header>
+        <div class="logo-text-div">
+            <img src="{% static 'logo.png' %}" class="logo-text" alt="">
+            <h2 class="logo">ENSISmart</h2>
+        </div>
+        
+        <nav class="navigation top">
+            <div class="form-container">
+
+                <div class="remember-forgot checkbox-wrapper-10">
+                    <input type="checkbox" class="tgl tgl-flip" id= "cb5">
+                    <label for="cb5" data-tg-on="Absences" data-tg-off="Notes" class="tgl-btn"></label>
+                </div>
+                <form class="logout-form" action="">
+                    <button type="submit" class="logout-btn">Se déconnecter</button>
+                </form>
+            </div>
+        </nav>
+
+        
+    </header>
+
+    <div class="view-container">
+
+        <div class=" UE-card">
+            <h2 class ="UE-title">
+                UE 1
+            </h2>
+            <hr>
+            <div>
+                <ul class="ul-note">
+                    <li class="li-note"><h3>Note - 15</h3><li>
+                </ul>
+            </div>
+        </div>
+        <div class=" UE-card">
+            <h2 class ="UE-title">
+                UE 1
+            </h2>
+            <hr>
+            <div>
+                <ul class="ul-note">
+                    <li><h3>Note - 15</h3><li>
+                    <li><h3>Note - 15</h3><li>
+                    <li><h3>Note - 15</h3><li>
+                    <li><h3>Note - 15</h3><li>
+                </ul>
+            </div>
+        </div>
+         
+    </div>
+
+    
+
+    
+
+    
+    
+
+
+
+    <script src="{% static 'general_js.js' %}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+</body>
+
+</html>

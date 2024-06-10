@@ -1,0 +1,134 @@
+
+.form-container {
+    display: flex;
+    width: 100%; /* Add space between the buttons */
+}
+
+.form-container form {
+    margin: 0; /* Remove default margin from forms */
+    margin-right: 10%;
+}
+
+ul, li {
+    list-style-type: none;
+}
+
+li {
+    padding-top: 5px;
+}
+
+.view-container {
+    position: absolute;
+    border: solid #fff 5px;
+    width: 100%;
+    height: 85%;
+    transform: translateY(7%);
+}
+
+.view-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 5%;
+    grid-row-gap: 0px;
+}
+
+.UE-card {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    transition: .2s ease;
+
+}
+
+.UE-title {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+    font-size: 3em;
+}
+
+.ul-note {
+    font-size: 1.7em;
+    height: 100%;
+}
+
+
+.li-note {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.logout-btn {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 50px;
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    text-decoration: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+.logout-btn:hover {
+    background-color: #fff;
+    color: #0a283c;
+}
+
+.user-info h3 {
+    font-weight: 500;
+}
+
+.user-info img {
+    width: 100px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.profile {
+    width: 100px;
+}
+
+.switchBtn {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 50px;
+    background: transparent;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+
+}
+
+.checkbox-wrapper-10 .tgl + .tgl-btn {
+    font-size: 1.5em ;
+}
+
+
+.right {
+    padding-left: 10%  ;
+}
+
+.left {
+    margin-left: 0; /* Adjust this value if needed */
+}
+
