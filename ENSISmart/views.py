@@ -38,7 +38,7 @@ def signup_view(request):
                         request.session.set_expiry(1209600)  # 2 weeks
                     else:
                         request.session.set_expiry(0)
-                    return redirect('success')
+                    return dashboard_view(request)
                 else:
                     form_login.add_error(None, 'Invalid email or password')
         else:
@@ -103,7 +103,7 @@ def reset_password_view(request, token):
             user.save()
             
             temp_link.delete()
-            return redirect('success')
+            signup_view(request)
     else:
         form = PasswordResetForm()
 
@@ -111,7 +111,7 @@ def reset_password_view(request, token):
 
 @login_required
 def dashboard_view(request):
-    return render(request, 'main_note.html')
+    return redirect('notes')
 
 def logout_view(request):
   logout(request)
