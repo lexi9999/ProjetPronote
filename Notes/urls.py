@@ -2,6 +2,7 @@ from django.urls import path, include
 from . import views
 from .views import note_main_view
 from User import views
+from Notes import views
 
 urlpatterns = [
     path('', note_main_view, name='notes'),
