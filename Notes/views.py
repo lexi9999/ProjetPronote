@@ -69,3 +69,7 @@ def note_liste(request, matiere):
 def matiere_liste(request):
     matieres = Matiere.objects.all()
     return render(request, 'matiere_liste.html', {'matieres': matieres})
+
+
+def note_main_view(request):
+    return render(request, 'main_note.html')

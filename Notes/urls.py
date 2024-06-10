@@ -1,7 +1,10 @@
 from django.urls import path, include
 from . import views
+from .views import note_main_view
+from User import views
 
 urlpatterns = [
+    path('', note_main_view, name='notes'),
     path('matieres/', views.matiere_liste, name='matiere_liste'),
     path('notes/<int:matiere>/', views.note_liste, name='note_liste'),
     path('ajouter/', views.ajouter_note, name='ajouter_note'),
