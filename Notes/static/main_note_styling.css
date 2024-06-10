@@ -18,11 +18,41 @@ li {
 }
 
 .view-container {
-    position: absolute;
-    border: solid #fff 5px;
-    width: 100%;
-    height: 85%;
-    transform: translateY(7%);
+    grid-area: 2 / 1 / 10 / 2; 
+}
+
+.semester.side-nav-bar {
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center;
+    font-size: 1.3em;
+
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+    border: solid #fff 2px;
+    border-radius: 20px;
+
+}
+
+.semester-link {
+    color: #fff; /* Example styling for links */
+    text-decoration: none;
+    padding: 20px;
+}
+
+.clicked-link {
+
+    background-color: #ddd;
+    color: #0a283c; /* Example hover effect */
+}
+
+.semester-link:hover {
+    background-color: #ddd;
+    color: #0a283c; /* Example hover effect */
 }
 
 .view-container {
@@ -30,7 +60,53 @@ li {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 5%;
-    grid-row-gap: 0px;
+    grid-row-gap: 2%;
+    padding-left: 10%;
+    padding-right: 10%;
+
+}
+
+.view-parent {
+
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(9, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 15px;
+    transform: translateY(5%);
+}
+
+.semester.side-nav-bar *{
+    text-decoration: none;
+    
+}
+.semester.side-nav-bar {
+
+    margin-left: 10%;
+    margin-right: 10%;
+    grid-area: 1 / 1 / 2 / 2; 
+
+
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    transition: .2s ease;
+}
+
+
+.main-view-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: px;
+}
+    
+
+div.semester {
+    
 }
 
 .UE-card {
