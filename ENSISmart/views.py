@@ -26,14 +26,17 @@ def signup_view(request):
             if form_login.is_valid():
                 email = form_login.cleaned_data.get('email_login')
                 
+                user = None
                 try:
-                    user = Eleve.objects.get(email=email)  # Get the user with the given email
+                    user = Eleve.objects.get(email=email)  # Try to get an Eleve with the given email
                 except Eleve.DoesNotExist:
-                    user = None
-                try:
-                    user = Enseignant.objects.get(email=email)  # Get the user with the given email
-                except Enseignant.DoesNotExist:
-                    user = None
+                    pass  # If no Eleve is found, do nothing
+
+                if user is None:  # If no Eleve was found, try to find an Enseignant
+                    try:
+                        user = Enseignant.objects.get(email=email)  # Try to get an Enseignant with the given email
+                    except Enseignant.DoesNotExist:
+                        pass
                     
                 print(user)
 
