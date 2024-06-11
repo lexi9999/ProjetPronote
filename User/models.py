@@ -10,7 +10,7 @@ class Eleve(models.Model):
     password = models.CharField(max_length=255, null=True)
     is_first_co = models.BooleanField(default=True)
     last_login = models.DateTimeField(auto_now_add=True, null=True)
-    
+    id = models.AutoField(primary_key=True)
 
     def __str__(self):
         return "Eleve: " +  self.email
@@ -22,6 +22,7 @@ class Enseignant(models.Model):
     password = models.CharField(max_length=255, null=True)
     is_first_co = models.BooleanField(default=True)
     last_login = models.DateTimeField(auto_now_add=True, null=True)
+    id = models.AutoField(primary_key=True)
 
     def __str__(self):
         return "Enseignant: " + self.email
