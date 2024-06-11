@@ -17,7 +17,7 @@ def index(request, enseignant_id):
         "enseignant": enseignant,
         "enseignant_id": enseignant_id,  # Add enseignant_id to the context
     }
-    return render(request,'Absences/base.html',context)
+    return render(request,'Absences/calendar.html',context)
 
 def all_events(request, enseignant_id):
     all_events = Events.objects.filter(enseignant_id=enseignant_id)

@@ -14,9 +14,8 @@
             <div class="row">
                 <h4>Calendrier des cours de {{ enseignant.name }} {{ enseignant.firstName }}</h4> 
 
-                <div class="col-md-12">  
-                    <div id='calendar'></div>
-                </div>
+                {%block content%}
+                {%endblock%}
 
                 <div class="col-md-12 mt-3">
                     <h5>Upload le fichier ICS</h5>
