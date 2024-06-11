@@ -3,3 +3,4 @@ from User.models import Eleve, Enseignant
 
 admin.site.register(Eleve)
 admin.site.register(Enseignant)
+

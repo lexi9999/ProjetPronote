@@ -19,7 +19,6 @@ class Command(BaseCommand):
             {"name": "Données", "coefficient": 62, "semestre_name": "S6"},
             {"name": "Réseaux et Cybersécurité", "coefficient": 66, "semestre_name": "S6"},
             {"name": "Compétences Humaines, Economiques et Sociales", "coefficient": 86, "semestre_name": "S6"},
-            {"name": "Anglais", "coefficient": 24, "semestre_name": "S6"},
         ]
 
         for ue in ues:
