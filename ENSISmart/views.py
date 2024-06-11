@@ -19,6 +19,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
 def signup_view(request):
+    if request.user.is_active:
+        print(request.user.is_active)
+        return dashboard_view(request)
     if request.method == 'POST':
         if 'email_login' in request.POST:
             form_login = LoginForm(request.POST)
@@ -114,7 +117,8 @@ def dashboard_view(request):
     if isinstance(request.user, Eleve):
         return redirect('notes')
     elif isinstance(request.user, Enseignant):
-        pass
+        print("enseignant")
+        return redirect('matiere_liste')
     elif (request.user, Administrateur):
         pass
 
