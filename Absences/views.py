@@ -5,14 +5,16 @@ from icalendar import Calendar
 from django.http import JsonResponse
 import datetime
 import requests
-from .models import Events, Absence, Eleve
+from .models import Events, Absence, Eleve, Enseignant
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 
 def index(request, enseignant_id):
     all_events = Events.objects.all()
+    enseignant = Enseignant.objects.get(id=enseignant_id)
     context = {
         "events":all_events,
+        "enseignant": enseignant,
         "enseignant_id": enseignant_id,  # Add enseignant_id to the context
     }
     return render(request,'Absences/base.html',context)
@@ -121,6 +123,8 @@ class UploadICalendarLinkView(View):
 
         return JsonResponse({'status': 'calendrier importé avec succès'})
 
+
+#gestion des absences si l'utilisateur est un prof
 class AbsenceView(View):
     def get(self, request, event_id, enseignant_id):
         event = get_object_or_404(Events, id=event_id, enseignant_id=enseignant_id)
@@ -143,6 +147,8 @@ class AbsenceView(View):
             eleve = get_object_or_404(Eleve, id=eleve_id)
             Absence.objects.create(eleve=eleve, event=event, enseignant_id=enseignant_id)
         return redirect('index', enseignant_id=enseignant_id)
+
+
 
 
 #affichage des absences si l'utilisateur est un élève

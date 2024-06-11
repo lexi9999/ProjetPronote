@@ -12,7 +12,7 @@
         <div class="container">
 
             <div class="row">
-                <h4>Calendrier des cours</h4> 
+                <h4>Calendrier des cours de {{ enseignant.name }} {{ enseignant.firstName }}</h4> 
 
                 <div class="col-md-12">  
                     <div id='calendar'></div>
@@ -176,7 +176,7 @@
                         '<h5>' + event.title + '</h5>' +
                         '<p>Start: ' + event.start.format("YYYY-MM-DD HH:mm") + '</p>' +
                         '<p>End: ' + event.end.format("YYYY-MM-DD HH:mm") + '</p>' +
-                        '<a href="/Absences/calendar/' + event.id + '/' + enseignant_id + '/" class="btn btn-primary">Gérer les Absences</a>'
+                        '<a href="/Absences/absence/' + event.id + '/' + enseignant_id + '/" class="btn btn-primary">Gérer les Absences</a>'
                     );
                 }
             });
