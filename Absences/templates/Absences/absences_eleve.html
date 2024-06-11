@@ -1,0 +1,71 @@
+<!--
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des absences</title>
+</head>
+<body>
+    <h1>Absences de {{ eleve.name }}</h1>
+    <ul>
+        {% for absence in absences %}
+            <li>
+                Événement: {{ absence.event.name }} <br>
+                Date de début: {{ absence.event.start|date:"d/m/Y H:i" }} <br>
+                Date de fin: {{ absence.event.end|date:"d/m/Y H:i" }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+-->
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des absences</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h4>Absences de {{ eleve.name }} {{ eleve.firstName }}</h4>
+            <div id='calendar'></div>
+        </div>
+    </div>
+
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/fr.js"></script>
+
+    <script>
+    $(document).ready(function () {
+
+        var absences = {{ absences_json|safe }} ;
+        var calendar = $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: absences,
+            eventRender: function(event, element) {
+                if (event.absent) {
+                    element.css('background-color', 'red');
+                } else {
+                    element.css('background-color', 'green');
+                }
+            }
+        });
+    });
+    </script>
+</body>
+</html>
