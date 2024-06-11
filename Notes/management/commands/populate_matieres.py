@@ -50,7 +50,6 @@ class Command(BaseCommand):
             {"name": "OJectif emploi", "coefficient": 4, "nom_enseignant": "VIGOUROUX", "prenom_enseignant": "Christian", "ue_name": "Compétences Humaines, Economiques et Sociales"},
             {"name": "Savoir communiquer", "coefficient": 12, "nom_enseignant": "VIGOUROUX", "prenom_enseignant": "Christian", "ue_name": "Compétences Humaines, Economiques et Sociales"},
             {"name": "Journée de l’ingénieur", "coefficient": 6, "nom_enseignant": "VIGOUROUX", "prenom_enseignant": "Christian", "ue_name": "Compétences Humaines, Economiques et Sociales"},
-            {"name": "Anglais", "coefficient": 24, "nom_enseignant": "RUMA", "prenom_enseignant": "Corinne", "ue_name": "Anglais"},
         ]
 
         for matiere in matieres:

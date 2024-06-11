@@ -25,10 +25,24 @@ def signup_view(request):
             form = SignupForm()  # Initialize an empty signup form
             if form_login.is_valid():
                 email = form_login.cleaned_data.get('email_login')
-                password = form_login.cleaned_data.get('password')
+                
+                try:
+                    user = Eleve.objects.get(email=email)  # Get the user with the given email
+                except Eleve.DoesNotExist:
+                    user = None
+                try:
+                    user = Enseignant.objects.get(email=email)  # Get the user with the given email
+                except Enseignant.DoesNotExist:
+                    user = None
+                    
+                print(user)
 
+                if user is None or user.is_first_co:
+                    return redirect('login')  # Redirect to login page if is_first_co is True
+
+                password = form_login.cleaned_data.get('password')
                 user = authenticate(request, email=email, password=password)
-                if user is not None:
+                if user is not None and user.password is not None:
                     user.is_active = True
                     user.save()
                     login(request, user, backend='User.backends.CustomBackend')
@@ -114,7 +128,7 @@ def dashboard_view(request):
     if isinstance(request.user, Eleve):
         return redirect('notes')
     elif isinstance(request.user, Enseignant):
-        pass
+        return redirect('notes_edit')
     elif (request.user, Administrateur):
         pass
 
