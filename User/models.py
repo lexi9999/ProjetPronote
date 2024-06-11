@@ -4,7 +4,9 @@ from datetime import timedelta
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+
 class Eleve(AbstractBaseUser):
+    id = models.AutoField(primary_key=True) 
     name = models.CharField(max_length=255)
     firstName = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
@@ -18,9 +20,10 @@ class Eleve(AbstractBaseUser):
     
 
     def __str__(self):
-        return "Eleve: " +  self.email
+        return "Eleve: " +  self.name + " " + self.firstName
     
 class Enseignant(AbstractBaseUser):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     firstName = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
@@ -33,9 +36,10 @@ class Enseignant(AbstractBaseUser):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return "Enseignant: " + self.email
+        return "Enseignant: " + self.name +" "+ self.firstName
 
 class Administrateur(AbstractBaseUser):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     firstName = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
