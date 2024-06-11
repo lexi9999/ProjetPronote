@@ -1,0 +1,284 @@
+
+.form-container {
+    display: flex;
+    width: 100%; /* Add space between the buttons */
+}
+
+.form-container form {
+    margin: 0; /* Remove default margin from forms */
+    margin-right: 10%;
+}
+
+ul, li {
+    list-style-type: none;
+}
+
+li {
+    padding-top: 5px;
+}
+
+.view-container {
+    grid-area: 2 / 1 / 10 / 2; 
+    transform: scale(0);
+}
+
+
+.semester.side-nav-bar {
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center;
+    font-size: 1.3em;
+
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+    border: solid #fff 2px;
+    border-radius: 20px;
+
+}
+
+.semester-link {
+    color: #fff; /* Example styling for links */
+    text-decoration: none;
+    padding: 20px;
+    background: transparent;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 20px;
+    font-size: 1.2em;
+}
+
+.note-sep {
+    opacity: 0.3;
+}
+
+.selected {
+    transform: scale(1);
+    transition: 0.5s;
+}
+
+button {
+    appearance: auto;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    background-color: buttonface;
+    margin: 0em;
+    padding-block: 0px;
+    padding-inline: 6px;
+    border-width: 0px;
+    border-style: none;
+    border-color: none;
+    border-image: none;
+}
+
+
+.semester-link:hover {
+    background-color: #ddd;
+    color: #0a283c; /* Example hover effect */
+}
+
+.view-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 5%;
+    grid-row-gap: 0%;
+    padding-left: 10%;
+    padding-right: 10%;
+
+}
+
+.view-parent {
+    position: fixed;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(9, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 15px;
+    top: -10%;
+    height: 100%;
+}
+
+.semester.side-nav-bar *{
+    text-decoration: none;
+    
+}
+.semester.side-nav-bar {
+
+    margin-left: 10%;
+    margin-right: 10%;
+    grid-area: 1 / 1 / 2 / 2; 
+    margin-top: 10%;
+
+
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    transition: .2s ease;
+}
+
+
+.main-view-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 100px;
+}
+    
+
+.semester-link.disabled {
+    pointer-events: none;
+    cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+    cursor: not-allowed;
+    background-color: #ddd;
+    color: #0a283c; /* Example hover effect */
+    border-radius: 20px;
+}
+header {
+    height: 10%;
+}
+
+.UE-card {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    transition: .2s ease;
+    height: 350px;
+
+    margin-bottom: 25px;
+
+}
+
+.ul-note-container {
+    height: 100%; /* Set the maximum height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
+}
+
+.UE-title {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.ul-note {
+    font-size: 1.2em;
+}
+
+
+.li-note {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.logout-btn {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 50px;
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    text-decoration: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+.logout-btn:hover {
+    background-color: #fff;
+    color: #0a283c;
+}
+
+.user-info h3 {
+    font-weight: 500;
+}
+
+.user-info img {
+    width: 100px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.profile {
+    width: 100px;
+}
+
+.welcome-container * {
+    font-size: 2em;
+}
+
+.left-link {
+    border-radius: 20px 0px 0px 20px;
+}
+
+.right-link {
+    border-radius: 0px 20px 20px 0px;
+}
+
+.switchBtn {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 50px;
+    background: transparent;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+
+}
+
+.checkbox-wrapper-10 .tgl + .tgl-btn {
+    font-size: 1.5em ;
+}
+
+button.clicked-link {
+
+    background-color: #ddd;
+    color: #0a283c; /* Example hover effect */
+}
+
+.right {
+    padding-left: 10%  ;
+}
+
+.left {
+    margin-left: 0; /* Adjust this value if needed */
+}
+
+
+
+.clicked-link {
+    cursor: not-allowed;
+    background-color: #ddd;
+    color: #0a283c; /* Example hover effect */
+}
