@@ -17,3 +17,10 @@ class TemporaryLink(models.Model):
 
     
 
+class Eleve2(models.Model):
+    num_etudiant = models.CharField(max_length=100)
+    NOM = models.CharField(max_length=100)
+    Prénom = models.CharField(max_length=100)
+    email = models.EmailField()
+    password = models.CharField(max_length=100)
+    role = models.CharField(max_length=50)
