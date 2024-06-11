@@ -3,6 +3,8 @@
 from django.core.management.base import BaseCommand
 from User.models import Enseignant
 
+Enseignant.objects.all().delete()
+
 class Command(BaseCommand):
     help = 'Populate the Enseignant model with initial data'
 
@@ -26,17 +28,17 @@ class Command(BaseCommand):
             {"name": "GSCHWIND", "firstName": "Florian", "email": "florian.gschwind@uha.fr"},
             {"name": "PERRONNE", "firstName": "Jean-Marc", "email": "jean-marc.perronne@uha.fr"},
             {"name": "GEMS", "firstName": "Armand", "email": "armand.gems@uha.fr"},
-            {"name": "GEYER", "firstName": "Christian ", "email": "christian.geyer@uha.fr"},
             {"name": "FONDEMENT", "firstName": "Frederic", "email": "frederic.fondement@uha.fr"},
             {"name": "DINTERICH", "firstName": "Jean", "email": "jean.dinterich@uha.fr"},
         ]
 
-        for enseignant in enseignants:
+        for i, enseignant in enumerate(enseignants, start=1):
             Enseignant.objects.create(
+                id=i,
                 name=enseignant["name"],
                 firstName=enseignant["firstName"],
                 email=enseignant["email"],
-                password=""  # Assurez-vous de gérer les mots de passe de manière sécurisée
+                password=""  # Make sure to handle passwords securely
             )
 
         self.stdout.write(self.style.SUCCESS('Successfully populated Enseignant model with emails'))

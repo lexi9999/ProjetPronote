@@ -80,7 +80,7 @@
                     {{ form_login.password }}
                 </div>
                 <button type="submit" class="btn login-btn">Se connecter</button>
-                <a href="#" class="first-co">Première connexion</a>
+                <a href="#" class="first-co">Première connexion / mot de passe oublié</a>
                 
                 
             </form>
@@ -93,7 +93,7 @@
         </span>
         <div class="form-box login">
             <div class="label-header">
-                <h2>Première connexion</h2>
+                <h2>Première connexion / mot de passe oublié</h2>
             </div>
             <form class="login-form" id="login-form" method="post" action="{% url 'login' %}">
                 {% csrf_token %}

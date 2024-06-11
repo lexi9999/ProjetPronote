@@ -55,8 +55,8 @@ class Command(BaseCommand):
             {"name": "WURTZ", "firstName": "PERRINE"},
         ]
 
-        for eleve in eleves:
-            email = f"{eleve['firstName'].lower()}.{eleve['name'].lower().replace(' ', '')}@uha.fr"
-            Eleve.objects.create(name=eleve["name"], firstName=eleve["firstName"], email=email)
+        for index, eleve_data in enumerate(eleves, start=1):
+            email = f"{eleve_data['firstName'].lower()}.{eleve_data['name'].lower().replace(' ', '')}@uha.fr"
+            Eleve.objects.create(id=index, name=eleve_data["name"], firstName=eleve_data["firstName"], email=email)
 
         self.stdout.write(self.style.SUCCESS('Successfully populated Eleve model with emails'))

@@ -120,7 +120,7 @@ def reset_password_view(request, token):
             user.save()
             
             temp_link.delete()
-            signup_view(request)
+            return redirect('login')
     else:
         form = PasswordResetForm()
 
