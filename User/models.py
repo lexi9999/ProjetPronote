@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class Eleve(AbstractBaseUser):
     id = models.AutoField(primary_key=True) 
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     firstName = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255, null=True)
@@ -24,7 +24,7 @@ class Eleve(AbstractBaseUser):
     
 class Enseignant(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     firstName = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255, null=True)
@@ -40,7 +40,7 @@ class Enseignant(AbstractBaseUser):
 
 class Administrateur(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     firstName = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255, null=True)

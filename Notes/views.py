@@ -77,4 +77,13 @@ def note_main_view(request):
     ues = UE.objects.all()
     notes = Note.objects.filter(eleve=request.user)
     semestres = Semestre.objects.all()
-    return render(request, 'main_note.html', {'ues': ues,'notes': notes, 'semestres': semestres})
+    usertype = 'eleve'
+    return render(request, 'main_note.html', {'ues': ues,'notes': notes, 'semestres': semestres, 'usertype': usertype})
+
+@login_required
+def note_main_edit(request):
+    ues = UE.objects.all()
+    matieres = Matiere.objects.filter(name_enseignant=request.user)
+    notes = Note.objects.filter(matiere__in=matieres)
+    semestres = Semestre.objects.all()
+    return render(request, '', {'ues': ues,'notes': notes, 'semestres': semestres, 'matieres': matieres})
