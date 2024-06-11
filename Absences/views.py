@@ -121,7 +121,6 @@ class UploadICalendarLinkView(View):
 
         return JsonResponse({'status': 'calendrier importé avec succès'})
 
-#gestion des absences si l'utilisateur est un prof
 class AbsenceView(View):
     def get(self, request, event_id, enseignant_id):
         event = get_object_or_404(Events, id=event_id, enseignant_id=enseignant_id)
@@ -150,26 +149,24 @@ class AbsenceView(View):
 class AbsenceView_eleve(View):
     template_name = 'Absences/absences_eleve.html'
 
-    def get(self, request, enseignant_id, eleve_id, *args, **kwargs):
+    def get(self, request, eleve_id, *args, **kwargs):
         eleve = Eleve.objects.get(id=eleve_id)
         absences = Absence.objects.filter(eleve=eleve)
-    
-        # Retrieve all events related to the teacher and mark those where the student is absent
-        all_events = Events.objects.filter(enseignant_id=enseignant_id)
+        
+        # Retrieve all events and mark those where the student is absent
+        all_events = Events.objects.all()
         events_data = []
         for event in all_events:
             is_absent = absences.filter(event=event).exists()
             events_data.append({
-                'id': event.id,
                 'title': event.name,
-                'start': event.start.strftime("%Y-%m-%dT%H:%M:%S"),
-                'end': event.end.strftime("%Y-%m-%dT%H:%M:%S"),
+                'start': event.start.isoformat(),
+                'end': event.end.isoformat(),
                 'absent': is_absent
             })
 
         context = {
             'eleve': eleve,
-            'enseignant_id': enseignant_id,
             'absences_json': json.dumps(events_data, cls=DjangoJSONEncoder)
         }
         return render(request, self.template_name, context)
