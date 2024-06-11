@@ -17,8 +17,7 @@ def index(request, enseignant_id):
     }
     return render(request,'Absences/base.html',context)
 
-def all_events(request):
-    enseignant_id = request.GET.get('enseignant_id')
+def all_events(request, enseignant_id):
     all_events = Events.objects.filter(enseignant_id=enseignant_id)
     out = []
     for event in all_events:
@@ -30,22 +29,21 @@ def all_events(request):
         })
     return JsonResponse(out, safe=False)
 
-def add_event(request):
+
+def add_event(request, enseignant_id):
     start = request.GET.get("start", None)
     end = request.GET.get("end", None)
     title = request.GET.get("title", None)
-    enseignant_id = request.GET.get("enseignant_id", None)
     event = Events(name=str(title), start=start, end=end, enseignant_id=enseignant_id)
     event.save()
     data = {}
     return JsonResponse(data)
  
-def update(request):
+def update(request, enseignant_id):
     start = request.GET.get("start", None)
     end = request.GET.get("end", None)
     title = request.GET.get("title", None)
     id = request.GET.get("id", None)
-    enseignant_id = request.GET.get("enseignant_id", None)
     event = Events.objects.get(id=id, enseignant_id=enseignant_id)
     event.start = start
     event.end = end
@@ -54,9 +52,8 @@ def update(request):
     data = {}
     return JsonResponse(data)
  
-def remove(request):
+def remove(request, enseignant_id):
     id = request.GET.get("id", None)
-    enseignant_id = request.GET.get("enseignant_id", None)
     event = Events.objects.get(id=id, enseignant_id=enseignant_id)
     event.delete()
     data = {}
@@ -64,20 +61,18 @@ def remove(request):
 
 
 class DeleteAllEventsView(View):
-    def get(self, request):
-        enseignant_id = request.GET.get('enseignant_id')
+    def get(self, request, enseignant_id):
         Events.objects.filter(enseignant_id=enseignant_id).delete()
         return JsonResponse({'status': 'Tous les événements ont été supprimés avec succès'})
 
-
 #upload du fichier ics si l'utilsateur est un prof
 class UploadICSView(View):
-    def get(self, request):
-        return render(request, 'Absences/upload_ics.html')
-
-    def post(self, request):
+    def post(self, request, enseignant_id):  # enseignant_id is now a parameter of the post method
         ics_file = request.FILES['ics_file']
-        enseignant_id = request.POST.get('enseignant_id')
+
+        if enseignant_id is None:
+            return JsonResponse({'error': 'enseignant_id is required'}, status=400)
+
         cal = Calendar.from_ical(ics_file.read())
 
         for component in cal.walk():
@@ -95,7 +90,6 @@ class UploadICSView(View):
                 event.save()
 
         return redirect('index', enseignant_id=enseignant_id)
-
 
 
 
@@ -127,6 +121,7 @@ class UploadICalendarLinkView(View):
 
         return JsonResponse({'status': 'calendrier importé avec succès'})
 
+#gestion des absences si l'utilisateur est un prof
 class AbsenceView(View):
     def get(self, request, event_id, enseignant_id):
         event = get_object_or_404(Events, id=event_id, enseignant_id=enseignant_id)
@@ -155,24 +150,26 @@ class AbsenceView(View):
 class AbsenceView_eleve(View):
     template_name = 'Absences/absences_eleve.html'
 
-    def get(self, request, eleve_id, *args, **kwargs):
+    def get(self, request, enseignant_id, eleve_id, *args, **kwargs):
         eleve = Eleve.objects.get(id=eleve_id)
         absences = Absence.objects.filter(eleve=eleve)
-        
-        # Retrieve all events and mark those where the student is absent
-        all_events = Events.objects.all()
+    
+        # Retrieve all events related to the teacher and mark those where the student is absent
+        all_events = Events.objects.filter(enseignant_id=enseignant_id)
         events_data = []
         for event in all_events:
             is_absent = absences.filter(event=event).exists()
             events_data.append({
+                'id': event.id,
                 'title': event.name,
-                'start': event.start.isoformat(),
-                'end': event.end.isoformat(),
+                'start': event.start.strftime("%Y-%m-%dT%H:%M:%S"),
+                'end': event.end.strftime("%Y-%m-%dT%H:%M:%S"),
                 'absent': is_absent
             })
 
         context = {
             'eleve': eleve,
+            'enseignant_id': enseignant_id,
             'absences_json': json.dumps(events_data, cls=DjangoJSONEncoder)
         }
         return render(request, self.template_name, context)
