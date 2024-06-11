@@ -14,7 +14,7 @@
         <tbody>
             {% for eleve in eleves %}
             <tr>
-                <td>{{ eleve.nom }} {{ eleve.prenom }}</td>
+                <td>{{ eleve.name }} {{ eleve.firstName }}</td>
                 <td>
                     <input type="checkbox" name="absent_students" value="{{ eleve.id }}"
                            {% if eleve in absent_students %}checked{% endif %}>
