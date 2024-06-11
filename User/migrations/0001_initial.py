@@ -15,14 +15,6 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Administrateur',
             fields=[
-<<<<<<< HEAD
-                ('id', models.AutoField(primary_key=True)),
-                ('name', models.CharField(max_length=255, unique=True)),
-                ('firstName', models.CharField(max_length=255)),
-                ('email', models.EmailField(max_length=254, unique=True)),
-                ('password', models.CharField(max_length=255)),
-                ('last_login', models.DateTimeField(auto_now_add=True, null=True)),
-=======
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255, unique=True)),
                 ('firstName', models.CharField(max_length=255)),
@@ -30,7 +22,6 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(max_length=255, null=True)),
                 ('last_login', models.DateTimeField(auto_now_add=True, null=True)),
                 ('is_active', models.BooleanField(default=False)),
->>>>>>> 5bdf2b3663d5f5787b3391e31a0301388388747f
             ],
             options={
                 'abstract': False,
@@ -39,15 +30,6 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Eleve',
             fields=[
-<<<<<<< HEAD
-                ('id', models.AutoField(primary_key=True)),
-                ('name', models.CharField(max_length=255, unique=True)),
-                ('firstName', models.CharField(max_length=255)),
-                ('email', models.EmailField(max_length=254, unique=True)),
-                ('password', models.CharField(max_length=255)),
-                ('is_first_co', models.BooleanField(default=True)),
-                ('last_login', models.DateTimeField(auto_now_add=True, null=True)),
-=======
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255, unique=True)),
                 ('firstName', models.CharField(max_length=255)),
@@ -56,7 +38,6 @@ class Migration(migrations.Migration):
                 ('is_first_co', models.BooleanField(default=True)),
                 ('last_login', models.DateTimeField(auto_now_add=True, null=True)),
                 ('is_active', models.BooleanField(default=False)),
->>>>>>> 5bdf2b3663d5f5787b3391e31a0301388388747f
             ],
             options={
                 'abstract': False,
@@ -65,11 +46,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Enseignant',
             fields=[
-<<<<<<< HEAD
-                ('id', models.AutoField(primary_key=True)),
-=======
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
->>>>>>> 5bdf2b3663d5f5787b3391e31a0301388388747f
                 ('name', models.CharField(max_length=255, unique=True)),
                 ('firstName', models.CharField(max_length=255)),
                 ('email', models.EmailField(max_length=254, unique=True)),

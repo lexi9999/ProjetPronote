@@ -48,7 +48,8 @@ class Command(BaseCommand):
                     email=row['email'],
                     password=make_password(row['password']),  # Hashage du mot de passe
                     is_first_co=True if pd.isna(row['Premiere connexion']) else False,  # Convertir la valeur en booléen
-                    last_login=row['Derniere connexion'] if pd.notna(row['Derniere connexion']) else None  # Assigner la valeur de date
+                    last_login=row['Derniere connexion'] if pd.notna(row['Derniere connexion']) else None,  # Assigner la valeur de date
+                    is_active=False if pd.isna(row['est actif']) else True
                 )
                 self.stdout.write(self.style.SUCCESS(f"{model.__name__} {obj.name} {obj.firstName} importé avec succès."))
             except Exception as e:
