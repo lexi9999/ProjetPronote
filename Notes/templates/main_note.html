@@ -6,7 +6,7 @@
     
     {% load static %}
     <link rel="stylesheet" type='text/css' href="{% static 'general_styling.css' %}">
-    <link rel="stylesheet" type='text/css' href="../static/main_note_styling.css">
+    <link rel="stylesheet" type='text/css' href="{% static 'main_note_styling.css' %}">
     <script>
         const signupUrl = "{% url 'login' %}";
     </script>
@@ -14,169 +14,73 @@
 <body>
 
 
-    <header>
-        <div class="logo-text-div">
-            <img src="{% static 'logo.png' %}" class="logo-text" alt="">
-            <h2 class="logo">ENSISmart</h2>
-        </div>
-
-        <div class ="welcome-container">
-            <p> Bienvenue {{ user.firstName|capfirst }}</p>
-        </div>
-        
-        <nav class="navigation top">
-            <div class="form-container">
-
-                <div class="remember-forgot checkbox-wrapper-10">
-                    <input type="checkbox" class="tgl tgl-flip" id= "cb5">
-                    <label for="cb5" data-tg-on="Absences" data-tg-off="Notes" class="tgl-btn"></label>
-                </div>
-                <form class="logout-form" action="">
-                    <button type="submit" class="logout-btn">Se déconnecter</button>
-                </form>
-            </div>
-        </nav>
-
-        
-    </header>
-
-    <div class="view-parent">
-
-        <div class="semester side-nav-bar">
-            <a class="semester-link" href="#">semestre 5</a>
-            <a class="semester-link clicked-link" href="#">semestre 6</a>
-            <a class="semester-link" href="#">semestre 7</a>
-            <a class="semester-link" href="#">semestre 8</a>
-            <a class="semester-link" href="#">semestre 9</a>
-            <a class="semester-link" href="#">semestre 10</a>
-        </div>  
-    
-        <div class="view-container">
-
-            <div class=" UE-card">
-                <h2 class ="UE-title">
-                    UE 1
-                </h2>
-                <hr>
-                <div>
-                    <ul class="ul-note">
-                        <li class="li-note"><h3>Note - 15</h3><li>
-                    </ul>
-                </div>
-            </div>
-            <div class=" UE-card">
-                <h2 class ="UE-title">
-                    UE 1
-                </h2>
-                <hr>
-                <div>
-                    <ul class="ul-note">
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class=" UE-card">
-                <h2 class ="UE-title">
-                    UE 1
-                </h2>
-                <hr>
-                <div>
-                    <ul class="ul-note">
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class=" UE-card">
-                <h2 class ="UE-title">
-                    UE 1
-                </h2>
-                <hr>
-                <div>
-                    <ul class="ul-note">
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class=" UE-card">
-                <h2 class ="UE-title">
-                    UE 1
-                </h2>
-                <hr>
-                <div>
-                    <ul class="ul-note">
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class=" UE-card">
-                <h2 class ="UE-title">
-                    UE 1
-                </h2>
-                <hr>
-                <div>
-                    <ul class="ul-note">
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class=" UE-card">
-                <h2 class ="UE-title">
-                    UE 1
-                </h2>
-                <hr>
-                <div>
-                    <ul class="ul-note">
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class=" UE-card">
-                <h2 class ="UE-title">
-                    UE 1
-                </h2>
-                <hr>
-                <div>
-                    <ul class="ul-note">
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                        <li><h3>Note - 15</h3><li>
-                    </ul>
-                </div>
-            </div>
-            
-        </div>  
+<header>
+    <div class="logo-text-div">
+        <img src="{% static 'logo.png' %}" class="logo-text" alt="">
+        <h2 class="logo">ENSISmart</h2>
     </div>
 
-
-    <script src="{% static 'general_js.js' %}"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <div class ="welcome-container">
+        <p> Bienvenue {{ user.firstName|capfirst }}</p> <!-- Fixed syntax error here -->
+    </div>
     
-</body>
+    <nav class="navigation top">
+        <div class="form-container">
 
+            <div class="remember-forgot checkbox-wrapper-10">
+                <input type="checkbox" class="tgl tgl-flip" id= "cb5">
+                <label for="cb5" data-tg-on="Absences" data-tg-off="Notes" class="tgl-btn"></label>
+            </div>
+            <form class="logout-form" action="{% url 'logout-view' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Se déconnecter</button>
+            </form>
+        </div>
+    </nav>
+</header>
+
+<div class="view-parent">
+
+    <div class="semester side-nav-bar">
+        <!-- Display semesters dynamically if needed -->
+        {% for semestre in semestres %}
+            <button class="semester-link {{ semestre.name|slugify }}" >{{ semestre.name|capfirst }}</button>
+        {% endfor %}
+    </div>  
+
+
+    {% for semestre in semestres %}
+        <div class="view-container {{ semestre.name|slugify }}">
+            <!-- Iterate over UE and associated notes -->
+            {% for ue in ues %}
+                {% if ue.semestre == semestre %}
+                    <div class="UE-card">
+                        <h2 class="UE-title">{{ ue.name|capfirst }}</h2>
+                        <hr>
+                        <div class="ul-note-container">
+                            <ul class="ul-note">
+                                {% for matiere in ue.matiere_set.all %}
+                                    <!-- Display notes for each UE -->
+                                    {% for note in notes %}
+                                        {% if note.matiere == matiere %}
+                                            <li><h3>{{ note.matiere.name|capfirst }}: {{ note.note }}</h3></li>
+                                            <hr class="note-sep">
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>  
+    {% endfor %}
+</div>
+
+<script src="{% static 'general_js.js' %}"></script>
+<script src="{% static 'main_note_js.js' %}"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
 </html>

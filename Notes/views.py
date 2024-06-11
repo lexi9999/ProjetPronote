@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.decorators.http import require_POST
-from Notes.models import Note, Matiere
+from Notes.models import Note, Matiere, Semestre, UE
 from .forms import NoteForm
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.db.models import Avg
+from User.models import *
+from django.contrib.auth.decorators import login_required
 
 #@permission_required('User.edit_note')
 def ajouter_note(request):
@@ -70,6 +72,9 @@ def matiere_liste(request):
     matieres = Matiere.objects.all()
     return render(request, 'matiere_liste.html', {'matieres': matieres})
 
-
+@login_required
 def note_main_view(request):
-    return render(request, 'main_note.html')
+    ues = UE.objects.all()
+    notes = Note.objects.filter(eleve=request.user)
+    semestres = Semestre.objects.all()
+    return render(request, 'main_note.html', {'ues': ues,'notes': notes, 'semestres': semestres})

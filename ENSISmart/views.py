@@ -7,7 +7,7 @@ from .forms import PasswordResetForm, SignupForm, LoginForm
 from django.utils.crypto import get_random_string
 from django.utils import timezone
 from datetime import timedelta
-from User.models import Eleve, Enseignant
+from User.models import Eleve, Enseignant, Administrateur
 from .models import TemporaryLink
 from django.contrib.auth.models import *
 from django.contrib.auth.hashers import make_password
@@ -111,8 +111,16 @@ def reset_password_view(request, token):
 
 @login_required
 def dashboard_view(request):
-    return redirect('notes')
+    if isinstance(request.user, Eleve):
+        return redirect('notes')
+    elif isinstance(request.user, Enseignant):
+        pass
+    elif (request.user, Administrateur):
+        pass
 
 def logout_view(request):
-  logout(request)
-  return redirect("login-view")
+    user = request.user
+    user.is_active = False
+    user.save()
+    logout(request)
+    return redirect("login")
