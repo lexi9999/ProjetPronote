@@ -9,13 +9,9 @@ import json
 from django.db.models import Avg
 from User.models import *
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
 import csv
 from django.http import HttpResponse
 
-=======
-from django.contrib.auth import authenticate, login, logout
->>>>>>> 21eed845cf488ba11f94edb4654331d709bfdca1
 
 #@permission_required('User.edit_note')
 def ajouter_note(request):
