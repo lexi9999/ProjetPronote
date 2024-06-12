@@ -449,6 +449,28 @@ span.paragraph p {
     cursor: pointer;
 }
 
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff #0a283c;
+}
+
+/* Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+    width: 11px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #0a283c;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 0px solid #0a283c;
+}
+
 .checkbox-wrapper-10 .tgl-flip + .tgl-btn:before {
     content: attr(data-tg-off);
 

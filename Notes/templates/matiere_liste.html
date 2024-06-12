@@ -1,15 +1,58 @@
-<!-- Notes/templates/matiere_list.html -->
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Liste des Matières</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% load static %}
+    <link rel="stylesheet" type='text/css' href="{% static 'general_styling.css' %}">
+    <link rel="stylesheet" type='text/css' href="{% static 'main_note_styling.css' %}">
+    <link rel="stylesheet" type='text/css' href="{% static 'main_prof_note_styling.css' %}">
+    <script>
+        const signupUrl = "{% url 'login' %}";
+    </script>
 </head>
 <body>
-    <h1>Liste des Matières</h1>
-    <ul>
-        {% for matiere in matieres %}
-            <li> <a href="{% url 'note_liste' matiere.id %}"> {{ matiere.name }} </a></li>
-        {% endfor %}
-    </ul>
+    <header>
+        <div class="logo-text-div">
+            <img src="{% static 'logo.png' %}" class="logo-text" alt="">
+            <h2 class="logo">ENSISmart</h2>
+        </div>
+    
+        <div class ="welcome-container">
+            <p> Bienvenue {{ user.firstName|capfirst }}</p> <!-- Fixed syntax error here -->
+        </div>
+        
+        <nav class="navigation top">
+            <div class="form-container">
+    
+                <div class="remember-forgot checkbox-wrapper-10">
+                    <input type="checkbox" class="tgl tgl-flip" id= "cb5">
+                    <label for="cb5" data-tg-on="Absences" data-tg-off="Matières" class="tgl-btn"></label>
+                </div>
+                <form class="logout-form" action="{% url 'logout-view' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">Se déconnecter</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="prof-main-container">
+        <div class="bar-matiere">
+            {% for matiere in matieres %}
+                <div class="matiere-btn-container">
+                    <a href="{% url 'note_liste' matiere.id %}" class="matiere-btn">
+                        <div class ="matiere-div-link">
+                            {{ matiere.name|capfirst }}
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+    <script src="{% static 'matiere_liste.js' %}"></script>
 </body>
 </html>

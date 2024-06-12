@@ -9,6 +9,7 @@ import json
 from django.db.models import Avg
 from User.models import *
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 #@permission_required('User.edit_note')
 def ajouter_note(request):
@@ -68,9 +69,24 @@ def note_liste(request, matiere):
     eleves = notes.values_list('eleve', flat=True).distinct()
     return render(request, 'note_liste.html', {'notes': notes, 'eleves': eleves})
 
+@login_required
 def matiere_liste(request):
-    matieres = Matiere.objects.all()
+    if isinstance(request.user, Eleve):
+        return redirect("notes")
+    matieres = Matiere.objects.filter(name_enseignant=request.user)
     return render(request, 'matiere_liste.html', {'matieres': matieres})
+
+def matiere_notes(request, matiere_id):
+    matiere = get_object_or_404(Matiere, id=matiere_id)
+    notes = Note.objects.filter(matiere=matiere).select_related('eleve')
+    notes_data = [
+        {
+            'eleve': note.eleve.name,
+            'note': note.note
+        }
+        for note in notes
+    ]
+    return JsonResponse(notes_data, safe=False)
 
 @login_required
 def note_main_view(request):
