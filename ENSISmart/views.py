@@ -52,12 +52,10 @@ def signup_view(request):
                     user.is_active = True
                     user.save()
                     login(request, user, backend='User.backends.CustomBackend')
-                    if form_login.cleaned_data.get('remember_me'):
-                        request.session.set_expiry
-
-                        request.session.set_expiry(1209600)  # 2 weeks
-                    else:
-                        request.session.set_expiry(0)
+                    request.session.set_expiry(1209600)
+                    if not form_login.cleaned_data.get('remember_me'):
+                        pass
+                        #request.session.set_expiry(0)
                     return dashboard_view(request)
                 else:
                     form_login.add_error(None, 'Invalid email or password')

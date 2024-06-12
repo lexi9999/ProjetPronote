@@ -11,7 +11,14 @@ from User.models import *
 from django.contrib.auth.decorators import login_required
 import csv
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 
+
+def get_current_user(request):
+    user_id = request.session.get('current_user_id')
+    if user_id:
+        return get_object_or_404(User, pk=user_id)
+    return None
 
 #@permission_required('User.edit_note')
 def ajouter_note(request):
@@ -19,7 +26,8 @@ def ajouter_note(request):
         form = NoteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('note_liste')
+            matiere_id = form.cleaned_data['matiere'].id
+            return redirect('note_liste', matiere=matiere_id)
     else:
         form = NoteForm()
     return render(request, 'ajouter_note.html', {'form': form})
@@ -64,19 +72,33 @@ def update_note_ajax(request, pk):
     else:
         return JsonResponse({'success': False, 'errors': form.errors})
 
-
-
+@login_required
 def note_liste(request, matiere):
+    print(request.user.is_authenticated)
+    print('gyg')
     notes = Note.objects.filter(matiere=matiere).select_related('eleve')
     eleves = notes.values_list('eleve', flat=True).distinct()
+
     return render(request, 'note_liste.html', {'notes': notes, 'eleves': eleves})
 
 @login_required
 def matiere_liste(request):
-    if isinstance(request.user, Eleve):
-        return redirect("notes")
+    
     matieres = Matiere.objects.filter(name_enseignant=request.user)
+
+    if request.method == "POST":
+        form_id = request.POST.get('form_id')
+        print(request.POST)
+
+        if form_id:
+            # Do whatever you need to do with the form_id
+            print("Form ID:", form_id)
+            # Then you can redirect or render another view passing this form_id
+            # For example:
+            return note_liste(request, matiere=form_id)
+        
     return render(request, 'matiere_liste.html', {'matieres': matieres})
+
 
 def matiere_notes(request, matiere_id):
     matiere = get_object_or_404(Matiere, id=matiere_id)
@@ -107,9 +129,10 @@ def note_main_edit(request):
     return render(request, '', {'ues': ues,'notes': notes, 'semestres': semestres, 'matieres': matieres})
 
 
-@csrf_exempt
 @login_required
+@csrf_exempt
 def import_notes(request):
+    print(request.user,"   z6e4f8z4ef98z4ef9ze")
     if request.method == "POST":
         csv_file = request.FILES['csv_file']
         if not csv_file.name.endswith('.csv'):
@@ -118,18 +141,26 @@ def import_notes(request):
         file_data = csv_file.read().decode("utf-8")
         lines = file_data.split("\n")
 
-        # Initialiser un reader CSV
         csv_reader = csv.reader(lines)
         next(csv_reader)  # Skip the header row
 
         for line in csv_reader:
             if line:  # Ignorer les lignes vides
-                note, created = Note.objects.update_or_create(
-                    note=float(line[0]),
-                    matiere=get_object_or_404(Matiere, pk=line[1]),
-                    eleve=get_object_or_404(Eleve, pk=line[2]),
-                )
+                note_value = float(line[0])
+                matiere_id = int(line[1])
+                eleve_id = int(line[2])
 
-        return redirect('note_liste')
+                matiere = get_object_or_404(Matiere, pk=matiere_id)
+                eleve = get_object_or_404(Eleve, pk=eleve_id)
+
+                Note.objects.update_or_create(
+                    eleve=eleve,
+                    matiere=matiere,
+                    defaults={'note': note_value},
+                )
+        
+        # Rediriger vers la liste des notes de la première matière du CSV
+        return note_liste(request, matiere_id)
     
-    return render(request, 'import_notes.html')
+    return render(request, 'note_liste.html')
+
