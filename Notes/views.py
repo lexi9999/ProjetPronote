@@ -65,18 +65,21 @@ def update_note_ajax(request, pk):
 
 
 def note_liste(request, matiere):
+    print(f"note_liste: {request.user.is_authenticated}")
     notes = Note.objects.filter(matiere=matiere).select_related('eleve')
     eleves = notes.values_list('eleve', flat=True).distinct()
     return render(request, 'note_liste.html', {'notes': notes, 'eleves': eleves})
 
 @login_required
 def matiere_liste(request):
+    print(f"matiere_liste: {request.user.is_authenticated}")
     if isinstance(request.user, Eleve):
         return redirect("notes")
     matieres = Matiere.objects.filter(name_enseignant=request.user)
     return render(request, 'matiere_liste.html', {'matieres': matieres})
 
 def matiere_notes(request, matiere_id):
+    print(f"matiere_notes: {request.user.is_authenticated}")
     matiere = get_object_or_404(Matiere, id=matiere_id)
     notes = Note.objects.filter(matiere=matiere).select_related('eleve')
     notes_data = [
@@ -90,6 +93,7 @@ def matiere_notes(request, matiere_id):
 
 @login_required
 def note_main_view(request):
+    print(f"note_main_view: {request.user.is_authenticated}")
     ues = UE.objects.all()
     notes = Note.objects.filter(eleve=request.user)
     semestres = Semestre.objects.all()
@@ -98,6 +102,7 @@ def note_main_view(request):
 
 @login_required
 def note_main_edit(request):
+    print(f"note_main_edit: {request.user.is_authenticated}")
     ues = UE.objects.all()
     matieres = Matiere.objects.filter(name_enseignant=request.user)
     notes = Note.objects.filter(matiere__in=matieres)
