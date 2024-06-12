@@ -12,6 +12,18 @@
     <link rel="stylesheet" type='text/css' href="{% static 'main_prof_note_styling.css' %}">
     <link rel="stylesheet" type='text/css' href="{% static 'note_liste.css' %}">
 </head>
+<body>
+    <style>
+    @media print {
+        th:nth-child(2), td:nth-child(2),th:nth-child(4), td:nth-child(4), a {
+            display: none;
+        }
+
+    }
+    </style>
+
+    <div class="container">
+        <h1>Liste des Notes de {{ matiere }}</h1>
 <body class='note-liste'>
     <div class="container scrollable-v">
         <form class="logout-form" action="{% url 'logout-view' %}" method="post">

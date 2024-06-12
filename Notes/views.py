@@ -61,8 +61,8 @@ def note_liste(request, matiere):
     print(f"note_liste: {request.user.is_authenticated}")
     notes = Note.objects.filter(matiere=matiere).select_related('eleve')
     eleves = notes.values_list('eleve', flat=True).distinct()
-
-    return render(request, 'note_liste.html', {'notes': notes, 'eleves': eleves})
+    nom_matiere = Matiere.objects.get(id=matiere)
+    return render(request, 'note_liste.html', {'notes': notes, 'eleves': eleves, 'matiere': nom_matiere.name})
 
 @login_required
 def matiere_liste(request):
