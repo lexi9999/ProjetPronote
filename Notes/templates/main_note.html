@@ -108,29 +108,6 @@ $(document).ready(function(){
     });
 });
 
-
-$(document).ready(function(){
-    $('#cb5').change(function(){
-        if(this.checked){
-            $.ajax({
-                url: '/Absences/content/', // l'URL de la vue que vous avez définie
-                method: 'GET',
-                success: function(data){
-                    $('#content_absences').html(data);
-                    $('#content_absences').show();
-                    $('#content_notes').hide();
-                },
-                error: function(){
-                    alert('Impossible de charger le contenu des absences.');
-                }
-            });
-        }else{
-            $('#content_notes').show();
-            $('#content_absences').hide();
-        }
-    });
-});
-
 </script>
 
 <script src="{% static 'general_js.js' %}"></script>
