@@ -9,6 +9,9 @@ import json
 from django.db.models import Avg
 from User.models import *
 from django.contrib.auth.decorators import login_required
+import csv
+from django.http import HttpResponse
+
 
 #@permission_required('User.edit_note')
 def ajouter_note(request):
@@ -87,3 +90,31 @@ def note_main_edit(request):
     notes = Note.objects.filter(matiere__in=matieres)
     semestres = Semestre.objects.all()
     return render(request, '', {'ues': ues,'notes': notes, 'semestres': semestres, 'matieres': matieres})
+
+
+@csrf_exempt
+@login_required
+def import_notes(request):
+    if request.method == "POST":
+        csv_file = request.FILES['csv_file']
+        if not csv_file.name.endswith('.csv'):
+            return HttpResponse("Le fichier n'est pas un CSV")
+        
+        file_data = csv_file.read().decode("utf-8")
+        lines = file_data.split("\n")
+
+        # Initialiser un reader CSV
+        csv_reader = csv.reader(lines)
+        next(csv_reader)  # Skip the header row
+
+        for line in csv_reader:
+            if line:  # Ignorer les lignes vides
+                note, created = Note.objects.update_or_create(
+                    note=float(line[0]),
+                    matiere=get_object_or_404(Matiere, pk=line[1]),
+                    eleve=get_object_or_404(Eleve, pk=line[2]),
+                )
+
+        return redirect('note_liste')
+    
+    return render(request, 'import_notes.html')

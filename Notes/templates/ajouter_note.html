@@ -12,6 +12,15 @@
         {{ form.as_p }}
         <button type="submit">Ajouter</button>
     </form>
+
+    <h2>Importer des Notes depuis un fichier CSV</h2>
+    <form method="post" enctype="multipart/form-data" action="{% url 'import_notes' %}">
+        {% csrf_token %}
+        <input type="file" name="csv_file" accept=".csv">
+        <button type="submit">Importer</button>
+    </form>
+
+    
     <a href="{% url 'note_liste' %}">Retour à la liste des notes</a>
 </body>
 </html>
