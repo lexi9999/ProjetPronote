@@ -28,7 +28,6 @@ Navigation:
 
 Le bouton "Notes" en haut à droite vous permet de basculer entre la vue de vos notes et de vos absences.
 
-
 FONCTIONNALITES POUR LES ENSEIGNANTS 
 
 - Gestion de l'emploi du temps : importez l'emploi du temps avec icalendar
