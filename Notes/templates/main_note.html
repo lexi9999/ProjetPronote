@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <link rel="stylesheet" type='text/css' href="{% static 'general_styling.css' %}">
     <link rel="stylesheet" type='text/css' href="{% static 'main_note_styling.css' %}">
     <script>
@@ -31,6 +33,13 @@
                 <input type="checkbox" class="tgl tgl-flip" id= "cb5">
                 <label for="cb5" data-tg-on="Absences" data-tg-off="Notes" class="tgl-btn"></label>
             </div>
+
+            <div>
+                <a href="{% url 'Absences:absences_eleve' eleve_id %}">
+                <button class="logout-btn">Absences</button>
+                </a>
+            </div>
+            
             <form class="logout-form" action="{% url 'logout-view' %}" method="post">
                 {% csrf_token %}
                 <button type="submit" class="logout-btn">Se déconnecter</button>
@@ -39,7 +48,9 @@
     </nav>
 </header>
 
-<div class="view-parent">
+
+
+<div class="view-parent" id="content_notes">
 
     <div class="semester side-nav-bar">
         <!-- Display semesters dynamically if needed -->
@@ -50,32 +61,61 @@
 
 
     {% for semestre in semestres %}
-        <div class="view-container {{ semestre.name|slugify }}">
-            <!-- Iterate over UE and associated notes -->
-            {% for ue in ues %}
-                {% if ue.semestre == semestre %}
-                    <div class="UE-card">
-                        <h2 class="UE-title">{{ ue.name|capfirst }}</h2>
-                        <hr>
-                        <div class="ul-note-container">
-                            <ul class="ul-note">
-                                {% for matiere in ue.matiere_set.all %}
-                                    <!-- Display notes for each UE -->
-                                    {% for note in notes %}
-                                        {% if note.matiere == matiere %}
-                                            <li><h3>{{ note.matiere.name|capfirst }}: {{ note.note }}</h3></li>
-                                            <hr class="note-sep">
-                                        {% endif %}
-                                    {% endfor %}
+    <div class="view-container {{ semestre.name|slugify }}">
+        <!-- Iterate over UE and associated notes -->
+        {% for ue in ues %}
+            {% if ue.semestre == semestre %}
+                <div class="UE-card" data-coeff="{{ ue.coefficient }}">
+                    <h2 class="UE-title">{{ ue.name|capfirst }} </h2>
+                    <hr>
+                    <div class="ul-note-container">
+                        <ul class="ul-note">
+                            {% for matiere in ue.matiere_set.all %}
+                                <!-- Display notes for each UE -->
+                                {% for note in notes %}
+                                    {% if note.matiere == matiere %}
+                                        <li>
+                                            <h3 data-coeff="{{ matiere.coefficient }}">
+                                                {{ matiere.name|capfirst }}: {{ note.note }}
+                                            </h3>
+                                        </li>
+                                        <hr class="note-sep">
+                                    {% endif %}
                                 {% endfor %}
-                            </ul>
-                        </div>
+                            {% endfor %}
+                        </ul>
                     </div>
-                {% endif %}
-            {% endfor %}
-        </div>  
-    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>  
+{% endfor %}
+
+
+
 </div>
+
+<div id="content_absences">
+    <p> Absences jjdeurijskkkkkkerkerkjerjekrje </p>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    $('#cb5').change(function(){
+        if(this.checked){
+            $('#content_absences').show();
+            $('#content_notes').hide();
+        }else{
+            $('#content_notes').show();
+            $('#content_absences').hide();
+        }
+    });
+});
+
+</script>
 
 <script src="{% static 'general_js.js' %}"></script>
 <script src="{% static 'main_note_js.js' %}"></script>
