@@ -7,12 +7,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
 </head>
-<body>
+<body style="background-color: #0A283C;">
     <div class="container">
         <div class="row">
-            <h4>Absences de {{ eleve.name }} {{ eleve.firstName }}</h4>
+            <h4 style="color:#fff;">Absences de {{ eleve.name }} {{ eleve.firstName }}</h4>
             <div id='calendar'></div>
         </div>
+        <style>
+            .fc-day-header, .fc-day-number, .fc-center h2{
+                color:white;
+            }
+            td.fc-day.fc-widget-content.fc-wed.fc-today {
+    background-color: darkgray;
+}
+        </style>
     </div>
 
  
