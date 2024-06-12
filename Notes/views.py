@@ -87,4 +87,4 @@ def note_main_edit(request):
     matieres = Matiere.objects.filter(name_enseignant=request.user)
     notes = Note.objects.filter(matiere__in=matieres)
     semestres = Semestre.objects.all()
-    return render(request, '', {'ues': ues,'notes': notes, 'semestres': semestres, 'matieres': matieres})
+    return render(request, 'matiere_liste.html', {'ues': ues,'notes': notes, 'semestres': semestres, 'matieres': matieres})
