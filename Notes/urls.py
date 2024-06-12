@@ -14,4 +14,5 @@ urlpatterns = [
     path('ajax/update_note/<int:pk>/', views.update_note_ajax, name='update_note_ajax'),  # URL AJAX
     #path('accounts/', include('django.contrib.auth.urls')),
     path('matiere/<int:matiere_id>/', views.matiere_notes, name='matiere_notes'),
+    path('import_notes/', views.import_notes, name='import_notes'),
 ]

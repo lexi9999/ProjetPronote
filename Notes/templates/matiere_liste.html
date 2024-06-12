@@ -43,16 +43,22 @@
         <div class="bar-matiere">
             {% for matiere in matieres %}
                 <div class="matiere-btn-container">
-                    <a href="{% url 'note_liste' matiere.id %}" class="matiere-btn">
-                        <div class ="matiere-div-link">
-                            {{ matiere.name|capfirst }}
-                        </div>
-                    </a>
-                </div>
+                    <form action="{% url 'matiere_liste' %}" method="post" id="form_id">
+                        {% csrf_token %}
+                        <input type="hidden" name="form_id" value="{{ matiere.id }}">
+                        <button type="submit" class="matiere-btn">
+                            <div class="matiere-div-link">
+                                {{ matiere.name|capfirst }}
+                            </div>
+                        </button>
+                    </form>
+            </div>
             {% endfor %}
         </div>
 
     </div>
+
+    
     <script src="{% static 'matiere_liste.js' %}"></script>
 </body>
 </html>
