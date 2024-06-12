@@ -41,9 +41,9 @@ def signup_view(request):
                     except Enseignant.DoesNotExist:
                         pass
                     
-                print(user)
+                print(user," ezfefzef")
 
-                if user is None or user.is_first_co:
+                if user is None:
                     return redirect('login')  # Redirect to login page if is_first_co is True
 
                 password = form_login.cleaned_data.get('password')
@@ -52,11 +52,8 @@ def signup_view(request):
                     user.is_active = True
                     user.save()
                     login(request, user, backend='User.backends.CustomBackend')
-                    if form_login.cleaned_data.get('remember_me'):
-                        request.session.set_expiry
-
-                        request.session.set_expiry(1209600)  # 2 weeks
-                    else:
+                    request.session.set_expiry(1209600)
+                    if not form_login.cleaned_data.get('remember_me'):
                         request.session.set_expiry(0)
                     return dashboard_view(request)
                 else:
@@ -129,7 +126,6 @@ def reset_password_view(request, token):
 
     return render(request, 'frontend/general_index/change_password.html', {'form': form})
 
-@login_required
 def dashboard_view(request):
     if isinstance(request.user, Eleve):
         return note_main_view(request)
