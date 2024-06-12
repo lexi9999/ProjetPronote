@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.core.mail import send_mail
 from django.http import JsonResponse
 
-from Notes.views import note_main_view
+from Notes.views import note_main_view, matiere_liste
 from .forms import PasswordResetForm, SignupForm, LoginForm
 from django.utils.crypto import get_random_string
 from django.utils import timezone
@@ -115,10 +115,10 @@ def reset_password_view(request, token):
 @login_required
 def dashboard_view(request):
     if isinstance(request.user, Eleve):
-        return redirect('notes')
+        return note_main_view(request)
     elif isinstance(request.user, Enseignant):
         print("enseignant")
-        return redirect('matiere_liste')
+        return matiere_liste(request)
     elif (request.user, Administrateur):
         pass
 
