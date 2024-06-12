@@ -33,6 +33,13 @@
                 <input type="checkbox" class="tgl tgl-flip" id= "cb5">
                 <label for="cb5" data-tg-on="Absences" data-tg-off="Notes" class="tgl-btn"></label>
             </div>
+
+            <div>
+                <a href="{% url 'Absences:absences_eleve' eleve_id %}">
+                <button class="logout-btn">Absences</button>
+                </a>
+            </div>
+            
             <form class="logout-form" action="{% url 'logout-view' %}" method="post">
                 {% csrf_token %}
                 <button type="submit" class="logout-btn">Se déconnecter</button>

@@ -4,6 +4,8 @@ from django.urls import include, path
 from Absences import views
 from Absences.views import UploadICSView, UploadICalendarLinkView, DeleteAllEventsView, AbsenceView, AbsenceView_eleve
 
+app_name = 'Absences'
+
 urlpatterns = [
     
     path('calendar/<int:enseignant_id>/', views.index, name='index'),

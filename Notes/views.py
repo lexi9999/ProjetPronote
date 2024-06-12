@@ -78,7 +78,8 @@ def note_main_view(request):
     notes = Note.objects.filter(eleve=request.user)
     semestres = Semestre.objects.all()
     usertype = 'eleve'
-    return render(request, 'main_note.html', {'ues': ues,'notes': notes, 'semestres': semestres, 'usertype': usertype})
+    eleve_id = request.user.id
+    return render(request, 'main_note.html', {'ues': ues,'notes': notes, 'semestres': semestres, 'usertype': usertype, 'eleve_id': eleve_id})
 
 @login_required
 def note_main_edit(request):

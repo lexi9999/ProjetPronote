@@ -1,6 +1,8 @@
 from django.core.management.base import BaseCommand
 from User.models import Eleve  
 
+Eleve.objects.all().delete()
+
 class Command(BaseCommand):
     help = 'Populate the Eleve model with initial data'
 
@@ -17,7 +19,6 @@ class Command(BaseCommand):
             {"name": "BOUARAB", "firstName": "LIZA"},
             {"name": "BOURICHI", "firstName": "IKRAM"},
             {"name": "CARBON", "firstName": "BENJAMIN"},
-            {"name": "CHAABANE", "firstName": "MEJDA"},
             {"name": "CHOUAF", "firstName": "MEHDI"},
             {"name": "DESMONTEIX", "firstName": "MAXENCE"},
             {"name": "DOUARD", "firstName": "EVAN"},
