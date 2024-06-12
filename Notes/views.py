@@ -82,7 +82,11 @@ def matiere_liste(request):
             # For example:
             return note_liste(request, matiere=form_id)
         
-    return render(request, 'matiere_liste.html', {'matieres': matieres})
+    enseignant_id = request.user.id
+    if isinstance(request.user, Eleve):
+        return redirect("notes")
+    matieres = Matiere.objects.filter(name_enseignant=request.user)
+    return render(request, 'matiere_liste.html', {'matieres': matieres, 'enseignant_id': enseignant_id})
 
 
 def matiere_notes(request, matiere_id):
