@@ -46,7 +46,7 @@ class Command(BaseCommand):
                     name=row['NOM'],
                     firstName=row['Prénom'],
                     email=row['email'],
-                    password=make_password(row['password']),  # Hashage du mot de passe
+                    password=make_password(row['password']) if pd.notna(row['password']) else None,  # Hashage du mot de passe
                     is_first_co=True if pd.isna(row['Premiere connexion']) else False,  # Convertir la valeur en booléen
                     last_login=row['Derniere connexion'] if pd.notna(row['Derniere connexion']) else None,  # Assigner la valeur de date
                     is_active=False if pd.isna(row['est actif']) else True
