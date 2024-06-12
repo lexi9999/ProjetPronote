@@ -4,7 +4,7 @@
 <h2>Mark Absences for {{ event.name }}</h2>
 <form method="post">
     {% csrf_token %}
-    <table class="table" action="{% url 'absence' event_id=event.id enseignant_id=enseignant_id %}">
+    <table class="table" action="{% url 'Absences:absence' event_id=event.id enseignant_id=enseignant_id %}">
         <thead>
             <tr>
                 <th>Student</th>
