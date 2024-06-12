@@ -50,8 +50,6 @@ FONCTIONNALITES POUR LES ENSEIGNANTS
 - Gestion de l'emploi du temps : importez l'emploi du temps avec icalendar
 - Gestion des absences: Ajoutez, modifiez et supprimez facilement les absences des élèves.
 - Gestion des notes: Attribuez, modifiez et consultez les notes des élèves pour chaque évaluation en uploadant un fichier cvs.
-- Génération de rapports: Créez des rapports des notes de votre classe de vos matières avec clique droit > imprimer
-
 
 ASSISTANCE
 
