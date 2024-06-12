@@ -12,7 +12,7 @@
         const signupUrl = "{% url 'login' %}";
     </script>
 </head>
-<body>
+<body class = "note-liste">
     <header>
         <div class="logo-text-div">
             <img src="{% static 'logo.png' %}" class="logo-text" alt="">
@@ -43,16 +43,12 @@
         <div class="bar-matiere">
             {% for matiere in matieres %}
                 <div class="matiere-btn-container">
-                    <form action="{% url 'matiere_liste' %}" method="post" id="form_id">
-                        {% csrf_token %}
-                        <input type="hidden" name="form_id" value="{{ matiere.id }}">
-                        <button type="submit" class="matiere-btn">
-                            <div class="matiere-div-link">
-                                {{ matiere.name|capfirst }}
-                            </div>
-                        </button>
-                    </form>
-            </div>
+                    <a href="{% url 'note_liste' matiere.id %}" class="matiere-btn">
+                        <div class ="matiere-div-link">
+                            {{ matiere.name|capfirst }}
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
         </div>
 

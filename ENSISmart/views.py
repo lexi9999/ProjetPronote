@@ -43,7 +43,7 @@ def signup_view(request):
                     
                 print(user," ezfefzef")
 
-                if user is None or user.is_first_co:
+                if user is None:
                     return redirect('login')  # Redirect to login page if is_first_co is True
 
                 password = form_login.cleaned_data.get('password')
@@ -126,7 +126,6 @@ def reset_password_view(request, token):
 
     return render(request, 'frontend/general_index/change_password.html', {'form': form})
 
-@login_required
 def dashboard_view(request):
     if isinstance(request.user, Eleve):
         return note_main_view(request)

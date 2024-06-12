@@ -1,0 +1,27 @@
+
+body.note-liste{
+    overflow-y:scroll;
+    overflow: auto;
+    font-size: 1.3em;
+}
+
+.table{
+    width: 100vh;
+}
+
+.edit-link {
+    text-decoration: underline;
+}
+
+.edit-input {
+    font-size: .9em;
+    height: fit-content;
+    width: 100px;
+}
+.save {
+    color: black;
+}
+.logout-form {
+    width: 30vh;
+    transform: translateX(50vh);
+}
