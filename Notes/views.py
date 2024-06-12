@@ -45,21 +45,6 @@ def modifier_note(request, pk):
     return render(request, 'modifier_note.html', {'form': form})
 
 
-""""""""""
-@require_POST
-def update_note_ajax(request, pk):
-    try:
-        note = get_object_or_404(Note, pk=pk)
-        form = NoteForm(request.POST, instance=note)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({'success': True, 'note': form.cleaned_data['note'], 'matiere': form.cleaned_data['matiere']})
-        else:
-            return JsonResponse({'success': False, 'errors': form.errors})
-    except Exception as e:
-        return JsonResponse({'success': False, 'errors': str(e)})
-  """""""""""
-
 @csrf_exempt
 @require_POST
 def update_note_ajax(request, pk):
@@ -120,7 +105,8 @@ def note_main_view(request):
     notes = Note.objects.filter(eleve=request.user)
     semestres = Semestre.objects.all()
     usertype = 'eleve'
-    return render(request, 'main_note.html', {'ues': ues,'notes': notes, 'semestres': semestres, 'usertype': usertype})
+    eleve_id = request.user.id
+    return render(request, 'main_note.html', {'ues': ues,'notes': notes, 'semestres': semestres, 'usertype': usertype,  'eleve_id': eleve_id})
 
 @login_required
 def note_main_edit(request):

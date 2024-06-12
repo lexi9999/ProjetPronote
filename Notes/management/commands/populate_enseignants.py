@@ -10,7 +10,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         enseignants = [
-            {"name": "DION", "firstName": "Joel", "email": "joel.dion@uha.fr"},
+            {"name": "DION", "firstName": "Joel", "email": "mejda.chaabane@uha.fr"},
             {"name": "ANICIC", "firstName": "Sylvia", "email": "sylvia.anicic@uha.fr"},
             {"name": "THIRY", "firstName": "Laurent", "email": "laurent.thiry@uha.fr"},
             {"name": "STUDER", "firstName": "Philippe", "email": "philippe.studer@uha.fr"},
