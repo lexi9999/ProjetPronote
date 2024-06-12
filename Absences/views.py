@@ -8,6 +8,10 @@ import requests
 from .models import Events, Absence, Eleve, Enseignant
 from django.core.serializers.json import DjangoJSONEncoder
 import json
+from django.http import HttpResponseForbidden
+from django.contrib.auth.decorators import login_required
+
+
 
 def index(request, enseignant_id):
     all_events = Events.objects.all()
@@ -176,3 +180,36 @@ class AbsenceView_eleve(View):
             'absences_json': json.dumps(events_data, cls=DjangoJSONEncoder)
         }
         return render(request, self.template_name, context)
+    
+
+""""""""""
+@login_required
+class AbsenceView_eleve(View):
+    template_name = 'Absences/absences_eleve.html'
+
+    def get(self, request, eleve_id, *args, **kwargs):
+        # Check if the logged-in user is a student and their ID matches eleve_id
+        if not request.user.usertype == 'eleve' or not request.user.id == eleve_id:
+            return HttpResponseForbidden()
+
+        eleve = Eleve.objects.get(id=eleve_id)
+        absences = Absence.objects.filter(eleve=eleve)
+        
+        # Retrieve all events and mark those where the student is absent
+        all_events = Events.objects.all()
+        events_data = []
+        for event in all_events:
+            is_absent = absences.filter(event=event).exists()
+            events_data.append({
+                'title': event.name,
+                'start': event.start.isoformat(),
+                'end': event.end.isoformat(),
+                'absent': is_absent
+            })
+
+        context = {
+            'eleve': eleve,
+            'absences_json': json.dumps(events_data, cls=DjangoJSONEncoder)
+        }
+        return render(request, self.template_name, context)
+"""""""""""""""""""""

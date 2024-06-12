@@ -39,6 +39,8 @@
     </nav>
 </header>
 
+
+
 <div class="view-parent">
 
     <div class="semester side-nav-bar">
@@ -48,10 +50,10 @@
         {% endfor %}
     </div>  
 
-
+<!--
     {% for semestre in semestres %}
         <div class="view-container {{ semestre.name|slugify }}">
-            <!-- Iterate over UE and associated notes -->
+
             {% for ue in ues %}
                 {% if ue.semestre == semestre %}
                     <div class="UE-card">
@@ -60,7 +62,7 @@
                         <div class="ul-note-container">
                             <ul class="ul-note">
                                 {% for matiere in ue.matiere_set.all %}
-                                    <!-- Display notes for each UE -->
+                       
                                     {% for note in notes %}
                                         {% if note.matiere == matiere %}
                                             <li><h3>{{ note.matiere.name|capfirst }}: {{ note.note }}</h3></li>
@@ -75,6 +77,39 @@
             {% endfor %}
         </div>  
     {% endfor %}
+    --> 
+
+    {% for semestre in semestres %}
+    <div class="view-container {{ semestre.name|slugify }}">
+        <!-- Iterate over UE and associated notes -->
+        {% for ue in ues %}
+            {% if ue.semestre == semestre %}
+                <div class="UE-card" data-coeff="{{ ue.coefficient }}">
+                    <h2 class="UE-title">{{ ue.name|capfirst }} </h2>
+                    <hr>
+                    <div class="ul-note-container">
+                        <ul class="ul-note">
+                            {% for matiere in ue.matiere_set.all %}
+                                <!-- Display notes for each UE -->
+                                {% for note in notes %}
+                                    {% if note.matiere == matiere %}
+                                        <li>
+                                            <h3 data-coeff="{{ matiere.coefficient }}">
+                                                {{ matiere.name|capfirst }}: {{ note.note }}
+                                            </h3>
+                                        </li>
+                                        <hr class="note-sep">
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>  
+{% endfor %}
+
 </div>
 
 <script src="{% static 'general_js.js' %}"></script>
