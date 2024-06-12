@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <link rel="stylesheet" type='text/css' href="{% static 'general_styling.css' %}">
     <link rel="stylesheet" type='text/css' href="{% static 'main_note_styling.css' %}">
     <script>
@@ -82,9 +84,12 @@
     </div>  
 {% endfor %}
 
-<div class="view-parent" id="content_absences">
-              <p> Absences jjdeurijskkkkkkerkerkjerjekrje </p>
+
+
 </div>
+
+<div id="content_absences">
+    <p> Absences jjdeurijskkkkkkerkerkjerjekrje </p>
 
 </div>
 
@@ -102,6 +107,30 @@ $(document).ready(function(){
         }
     });
 });
+
+
+$(document).ready(function(){
+    $('#cb5').change(function(){
+        if(this.checked){
+            $.ajax({
+                url: '/Absences/content/', // l'URL de la vue que vous avez définie
+                method: 'GET',
+                success: function(data){
+                    $('#content_absences').html(data);
+                    $('#content_absences').show();
+                    $('#content_notes').hide();
+                },
+                error: function(){
+                    alert('Impossible de charger le contenu des absences.');
+                }
+            });
+        }else{
+            $('#content_notes').show();
+            $('#content_absences').hide();
+        }
+    });
+});
+
 </script>
 
 <script src="{% static 'general_js.js' %}"></script>
