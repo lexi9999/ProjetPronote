@@ -123,8 +123,8 @@ def dashboard_view(request):
         pass
 
 def logout_view(request):
-    user = request.user
-    user.is_active = False
-    user.save()
+    if request.user.is_authenticated:
+        request.user.is_active = False
+        request.user.save()
     logout(request)
     return redirect("login")
