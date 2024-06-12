@@ -282,3 +282,55 @@ button.clicked-link {
     background-color: #ddd;
     color: #0a283c; /* Example hover effect */
 }
+
+
+@media print {
+    header, 
+    .semester.side-nav-bar, 
+    .logout-btn, 
+    .switchBtn, 
+    .user-info, 
+    .checkbox-wrapper-10
+    .UE-card {
+        display: none;
+    }
+    
+    #Bienvenue {
+        display: block;
+    }
+
+    .UE-title {
+        font-size:30px;
+    }
+
+    .view-container .UE-card h3 {
+        font-size: 15px;
+      }
+    
+    .view-container {
+        display: block !important; /* Assurez-vous que la vue est visible */
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-column-gap: 10px;
+        grid-row-gap: 20px;
+        padding: 0;
+    }
+    
+    .view-container .UE-card {
+        display: block !important; /* Forcer l'affichage des UEs */
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: 12pt; /* Ajustez la taille de la police selon vos besoins */
+    }
+    
+    .semester-link:hover, 
+    .semester-link.disabled, 
+    button.clicked-link {
+        background-color: transparent;
+        color: inherit;
+        cursor: default;
+    }
+}
