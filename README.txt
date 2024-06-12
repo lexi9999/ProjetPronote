@@ -16,6 +16,7 @@ Consultation des notes:
 - Une fois connecté, vous accédez à vos notes détaillées pour chaque évaluation et chaque matière.
 - Visualisez votre progression académique au fil du temps.
 - Identifiez facilement les domaines à améliorer.
+- Génération de rapports: Créez des rapports d'absences et de notes personnalisés.
 
 Consultation de l'emploi du temps:
 
@@ -30,8 +31,9 @@ Le bouton "Notes" en haut à droite vous permet de basculer entre la vue de vos 
 
 FONCTIONNALITES POUR LES ENSEIGNANTS 
 
+- Gestion de l'emploi du temps : importez l'emploi du temps avec icalendar
 - Gestion des absences: Ajoutez, modifiez et supprimez facilement les absences des élèves.
-- Gestion des notes: Attribuez, modifiez et consultez les notes des élèves pour chaque évaluation.
+- Gestion des notes: Attribuez, modifiez et consultez les notes des élèves pour chaque évaluation en uploadant un fichier cvs.
 - Génération de rapports: Créez des rapports d'absences et de notes personnalisés.
 
 ASSISTANCE
