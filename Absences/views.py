@@ -8,7 +8,11 @@ import requests
 from .models import Events, Absence, Eleve, Enseignant
 from django.core.serializers.json import DjangoJSONEncoder
 import json
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.http import HttpResponseForbidden
 
+@login_required
 def index(request, enseignant_id):
     all_events = Events.objects.all()
     enseignant = Enseignant.objects.get(id=enseignant_id)
@@ -150,12 +154,15 @@ class AbsenceView(View):
 
 
 
-
-#affichage des absences si l'utilisateur est un élève
+#vue des absences si l'utilisateur est un eleve
 class AbsenceView_eleve(View):
     template_name = 'Absences/absences_eleve.html'
-
+    @method_decorator(login_required)
     def get(self, request, eleve_id, *args, **kwargs):
+        # Check if the logged-in user is a student and their ID matches eleve_id
+        if not Eleve.objects.filter(id=eleve_id).exists():
+            return HttpResponseForbidden()
+
         eleve = Eleve.objects.get(id=eleve_id)
         absences = Absence.objects.filter(eleve=eleve)
         

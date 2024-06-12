@@ -17,7 +17,6 @@ class Command(BaseCommand):
             {"name": "BOUARAB", "firstName": "LIZA"},
             {"name": "BOURICHI", "firstName": "IKRAM"},
             {"name": "CARBON", "firstName": "BENJAMIN"},
-            {"name": "CHAABANE", "firstName": "MEJDA"},
             {"name": "CHOUAF", "firstName": "MEHDI"},
             {"name": "DESMONTEIX", "firstName": "MAXENCE"},
             {"name": "DOUARD", "firstName": "EVAN"},

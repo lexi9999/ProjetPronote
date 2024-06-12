@@ -19,7 +19,7 @@
 
                 <div class="col-md-12 mt-3">
                     <h5>Upload le fichier ICS</h5>
-                    <form method="post" enctype="multipart/form-data" action="{% url 'upload_ics' enseignant_id=enseignant_id %}">
+                    <form method="post" enctype="multipart/form-data" action="{% url 'Absences:upload_ics' enseignant_id=enseignant_id %}">
                         {% csrf_token %}
                         <input type="file" name="ics_file" class="form-control mb-2" required>
                         <button type="submit" class="btn btn-primary">Upload</button>
@@ -42,7 +42,7 @@
 
                 <div class="container">
                     <div class="row">
-                        <form method="post" id="upload-ical-form" action="{% url 'upload_icalendar_link' %}" class="form-inline">
+                        <form method="post" id="upload-ical-form" action="{% url 'Absences:upload_icalendar_link' %}" class="form-inline">
                             {% csrf_token %}
                             <h5>ICalendar URL</h5>
                             <input type="url" name="ical_url" id="ical_url" class="form-control mb-2" required>
