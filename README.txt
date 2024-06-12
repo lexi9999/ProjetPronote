@@ -1,6 +1,6 @@
-Guide d'utilisation d'ENSISmart
+GUIDE D'UTILISATION D'ENSISMART
 
-Connexion
+CONNEXION
 
 1. Sur la page d'accueil, cliquez sur le bouton "Se connecter".
 2. Entrez votre identifiant et votre mot de passe.
@@ -9,7 +9,7 @@ Connexion
 
 Si vous êtes un nouvel utilisateur, cliquez sur "Première connexion / Mot de passe oublié" et entrez votre adresse e-mail UHA pour recevoir un lien par e-mail vous permettant de définir votre mot de passe.
 
-Fonctionnalités pour les étudiants
+FONCTIONNALITES POUR LES ETUDIANTS
 
 Consultation des notes:
 
@@ -25,17 +25,15 @@ Consultation de l'emploi du temps:
 
 Navigation:
 
-- Le bouton "Notes" en haut à droite vous permet de basculer entre la vue de vos notes et de vos absences.
-- Utilisez le menu de navigation latéral pour accéder à d'autres fonctionnalités, telles que votre profil et vos paramètres.
+Le bouton "Notes" en haut à droite vous permet de basculer entre la vue de vos notes et de vos absences.
 
-Fonctionnalités pour les enseignants (à venir)
+
+FONCTIONNALITES POUR LES ENSEIGNANTS 
 
 - Gestion des absences: Ajoutez, modifiez et supprimez facilement les absences des élèves.
 - Gestion des notes: Attribuez, modifiez et consultez les notes des élèves pour chaque évaluation.
 - Génération de rapports: Créez des rapports d'absences et de notes personnalisés.
 
-Remarque: Les fonctionnalités pour les enseignants seront disponibles dans une version ultérieure d'ENSISmart.
+ASSISTANCE
 
-Assistance
-
-Si vous avez des questions ou rencontrez des problèmes, n'hésitez pas à contacter notre équipe d'assistance.
+Si vous avez des questions ou rencontrez des problèmes, n'hésitez pas à contacter notre équipe.
