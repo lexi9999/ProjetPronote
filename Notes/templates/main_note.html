@@ -29,14 +29,9 @@
     <nav class="navigation top">
         <div class="form-container">
 
-            <div class="remember-forgot checkbox-wrapper-10">
-                <input type="checkbox" class="tgl tgl-flip" id= "cb5">
-                <label for="cb5" data-tg-on="Absences" data-tg-off="Notes" class="tgl-btn"></label>
-            </div>
-
             <div>
-                <a href="{% url 'Absences:absences_eleve' eleve_id %}">
-                <button class="logout-btn">Absences</button>
+                <a href="{% url 'Absences:absences_eleve' eleve_id %}" class="logout-btn absence">
+                Absences
                 </a>
             </div>
             
@@ -95,10 +90,6 @@
 
 </div>
 
-<div id="content_absences">
-    <p> Absences jjdeurijskkkkkkerkerkjerjekrje </p>
-
-</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

@@ -33,6 +33,14 @@ a {
     width: fit-content;
 }
 
+.absence {
+    text-align: center;
+}
+
+a.logout-btn.absence *{
+    text-align: center;
+}
+
 .matiere-div-link {
     height: 120px;
     width: 300px;
