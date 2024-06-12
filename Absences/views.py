@@ -12,7 +12,6 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.http import HttpResponseForbidden
 
-@login_required
 def index(request, enseignant_id):
     all_events = Events.objects.all()
     enseignant = Enseignant.objects.get(id=enseignant_id)

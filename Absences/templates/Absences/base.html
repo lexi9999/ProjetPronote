@@ -1,28 +1,53 @@
 <html>
     <head>
         <title>Calendar</title>
-        <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- FullCalendar CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     </head>
 
-    <body>
+    <body style="background-color: #0a283c;">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <div class="container">
-
+            <style>
+                .fc-day-header, .fc-day-number, .fc-center h2{
+                    color:white;
+                }
+                td.fc-day.fc-widget-content.fc-wed.fc-today {
+    background-color: darkgray;
+}
+            </style>
             <div class="row">
-                <h4>Calendrier des cours de {{ enseignant.name }} {{ enseignant.firstName }}</h4> 
+                <h4 style="color: #fff;">Calendrier des cours {{ enseignant.name }} {{ enseignant.firstName }}</h4> 
 
                 {%block content%}
                 {%endblock%}
 
                 <div class="col-md-12 mt-3">
-                    <h5>Upload le fichier ICS</h5>
+                    <h5 style="color:#fff;">Upload le fichier ICS</h5>
                     <form method="post" enctype="multipart/form-data" action="{% url 'Absences:upload_ics' enseignant_id=enseignant_id %}">
                         {% csrf_token %}
                         <input type="file" name="ics_file" class="form-control mb-2" required>
-                        <button type="submit" class="btn btn-primary">Upload</button>
+                        <button id="Upload" type="submit" class="btn btn-primary">Upload</button>
+                        <style>
+                          #Upload{
+                            color: #0a283c;
+            height: 40px;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            text-decoration: none;
+            outline: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+            transition: .5s;
+        }
+        #Upload:hover {
+            background: #fff;
+            color: #0a283c;   
+        }
+                        </style>
                     </form>
                 </div>
 
@@ -44,13 +69,54 @@
                     <div class="row">
                         <form method="post" id="upload-ical-form" action="{% url 'Absences:upload_icalendar_link' %}" class="form-inline">
                             {% csrf_token %}
-                            <h5>ICalendar URL</h5>
+                            <h5 style="color:#fff;">ICalendar URL</h5>
                             <input type="url" name="ical_url" id="ical_url" class="form-control mb-2" required>
-                            <button type="submit" class="btn btn-primary">Upload</button>
+                            <button id="Upload1" type="submit" class="btn btn-primary" >Upload</button>
+                    <style>
+                                #Upload1{
+            color: #0a283c;
+            height: 40px;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            text-decoration: none;
+            outline: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+            transition: .5s;
+        }
+        #Upload1:hover {
+            background: #fff;
+            color: #0a283c;   
+        }
+                            </style>
                         </form>
                     </div>
                     <div class="row mt-3">
                         <button id="delete-all-events" class="btn btn-danger">Delete All Events</button>
+                        <style>
+                            #delete-all-events {
+            color: #0a283c;
+            height: 40px;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            text-decoration: none;
+            outline: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+            transition: .5s;
+        }
+        #delete-all-events:hover {
+            background: #fff;
+            color: #0a283c;   
+        }
+                        </style>
+                        
                     </div>
                 </div>
             </div>
