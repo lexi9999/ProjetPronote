@@ -73,7 +73,7 @@ def note_liste(request, matiere):
 def matiere_liste(request):
     if isinstance(request.user, Eleve):
         return redirect("notes")
-    matieres = Matiere.objects.all()
+    matieres = Matiere.objects.filter(name_enseignant=request.user)
     return render(request, 'matiere_liste.html', {'matieres': matieres})
 
 def matiere_notes(request, matiere_id):
