@@ -8,8 +8,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-mfsXXr8GisKAbz7uLII6mZj1N25Crw5LFXOtfq+1jZkTMJ6BS8F1APoUdrbwwpN/" crossorigin="anonymous">
 </head>
 <body>
+    <style>
+    @media print {
+        th:nth-child(2), td:nth-child(2),th:nth-child(4), td:nth-child(4), a {
+            display: none;
+        }
+
+    }
+    </style>
+
     <div class="container">
-        <h1>Liste des Notes</h1>
+        <h1>Liste des Notes de {{ matiere }}</h1>
         <table class="table">
             <thead>
                 <tr>
