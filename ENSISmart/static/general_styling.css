@@ -123,7 +123,7 @@ button.btn:hover{
 }
 
 .logo-text {
-    width: 17%;
+    columns: 2;
     transform: translateY(5%) translateX(11%);
 }
 
