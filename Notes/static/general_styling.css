@@ -44,7 +44,7 @@ header {
 .navigation {
 }
 
-.navigation a {
+/**.navigation a {
     position: relative;
     font-size: 1.5em;
     color: #fff;
@@ -52,7 +52,7 @@ header {
     font-weight: 500;
     margin-left: 40px;
     transition: .5s;
-}
+}**/
 
 .navigation a:hover {
     font-size: 2em;

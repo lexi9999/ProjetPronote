@@ -12,11 +12,17 @@
     <script>
         const signupUrl = "{% url 'login' %}";
     </script>
+    <style>
+        #content_notes{
+    overflow-y: auto;
+}
+    </style>
 </head>
 <body>
 
 
 <header>
+
     <div class="logo-text-div">
         <img src="{% static 'logo.png' %}" class="logo-text" alt="">
         <h2 class="logo">ENSISmart</h2>
@@ -29,10 +35,12 @@
     <nav class="navigation top">
         <div class="form-container">
 
-            <div>
+            <div class="logout-form">
+
                 <a href="{% url 'Absences:absences_eleve' eleve_id %}" class="logout-btn absence">
                 Absences
                 </a>
+
             </div>
             
             <form class="logout-form" action="{% url 'logout-view' %}" method="post">
