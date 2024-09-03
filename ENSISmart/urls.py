@@ -8,5 +8,4 @@ urlpatterns = [
     path('reset-password/<str:token>/', reset_password_view, name='reset_password_view'),
     path('error/', error_view, name='error')
 ]
-zzzzz
 
